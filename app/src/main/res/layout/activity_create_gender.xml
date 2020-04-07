@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/createprofilebackground"
+    tools:context=".CreateProfile.CreateGenderActivity">
+
+    <RelativeLayout
+        android:layout_alignParentTop="true"
+        android:id="@+id/genderTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        >
+        <TextView
+            android:layout_margin="10dp"
+            android:id="@+id/textcreate"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CREATE YOUR PROFILE"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="@color/colorWhite"
+            />
+        <ImageView
+            android:layout_margin="10dp"
+            android:layout_below="@+id/textcreate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/c1"
+            android:id="@+id/genderc1"
+            />
+
+        <TextView
+            android:textSize="30dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/genderc1"
+            android:textColor="@color/colorWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="YOUR GENDER ?"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_centerInParent="true"
+        android:layout_above="@+id/genderLogoRow"
+        android:layout_below="@+id/genderTitle"
+            android:id="@+id/maleForm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/genderMaleImage"
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/gendermale" />
+
+            <TextView
+                android:autoSizeTextType="uniform"
+                android:id="@+id/genderMaleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/genderMaleImage"
+                android:layout_centerHorizontal="true"
+                android:text="MALE"
+                android:textColor="@color/colorWhite"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    <RelativeLayout
+        android:layout_below="@+id/genderTitle"
+        android:layout_above="@+id/genderLogoRow"
+        android:id="@+id/femaleForm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:clickable="true"
+        >
+
+        <ImageView
+            android:layout_margin="5dp"
+            android:layout_above="@+id/genderFemaleText"
+            android:id="@+id/genderFemaleImage"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/genderfemale" />
+
+        <TextView
+            android:layout_margin="5dp"
+            android:id="@+id/genderFemaleText"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="0dp"
+            android:autoSizeTextType="uniform"
+            android:text="FEMALE"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_margin="10dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/forwardrow"
+        android:id="@+id/genderLogoRow"
+        />
+</RelativeLayout>

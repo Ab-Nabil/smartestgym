@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity"
+    android:background="@drawable/lgbackground">
+    <RelativeLayout
+        android:layout_margin="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/register_signForm"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageButton
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:id="@+id/register_profilePic"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/createimage"
+            android:scaleType="fitXY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/register_profilePic"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SIGNUP"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/register_signForm"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_centerInParent="true"
+        >
+
+        <EditText
+            android:layout_alignParentTop="true"
+            android:textColor="@color/colorBlack"
+            android:autoSizeTextType="uniform"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/register_userName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/usernamelogo"
+            android:hint="username..."
+            android:textColorHint="@color/colorGray"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="40dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+        <EditText
+            android:layout_below="@+id/register_userName"
+            android:textColor="@color/colorBlack"
+            android:autoSizeTextType="uniform"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/register_email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/emaillogo"
+            android:hint="Email address..."
+            android:textColorHint="@color/colorGray"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="40dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+        <EditText
+            android:textColor="@color/colorBlack"
+            android:autoSizeTextType="uniform"
+            android:textColorHint="@color/colorGray"
+            android:hint="Password..."
+            android:textStyle="bold"
+            android:id="@+id/register_password"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/register_email"
+            android:layout_centerHorizontal="true"
+            android:layout_height="50dp"
+            android:background="@drawable/passwordlogo"
+            android:inputType="textPassword"
+            android:paddingLeft="40dp"
+            android:textSize="15dp" />
+        <EditText
+            android:textColor="@color/colorBlack"
+            android:autoSizeTextType="uniform"
+            android:textColorHint="@color/colorGray"
+            android:hint="Confirm Password..."
+            android:textStyle="bold"
+            android:id="@+id/register_confirmPassword"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/register_password"
+            android:layout_centerHorizontal="true"
+            android:layout_height="50dp"
+            android:background="@drawable/confirmpasswordlogo"
+            android:inputType="textPassword"
+            android:paddingLeft="40dp"
+            android:textSize="15dp" />
+
+        <TextView
+            android:autoSizeTextType="uniform"
+            android:textColor="@color/colorBlack"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/register_forgetPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_below="@+id/register_confirmPassword"
+            android:text="Forget password?" />
+    </RelativeLayout>
+    <Button
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/register_buttonCreateAccount"
+        android:layout_below="@+id/register_signForm"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/buttoncreateaccount" />
+    <LinearLayout
+        android:layout_below="@+id/register_buttonCreateAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center">
+
+        <TextView
+            android:autoSizeTextType="uniform"
+            android:textColor="@color/colorGray"
+            android:layout_margin="5dp"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have account ?" />
+
+        <TextView
+            android:autoSizeTextType="uniform"
+            android:id="@+id/register_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Login"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>

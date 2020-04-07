@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/hellobackground"
+    tools:context=".WelcomeActivity">
+
+    <ImageView
+        android:src="@drawable/helloimage"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/buttoncreateaccount"
+        android:layout_alignParentTop="true"
+        />
+    <Button
+        android:id="@+id/buttoncreateaccount"
+        android:background="@drawable/buttoncreateaccount"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:layout_centerInParent="true"
+        />
+    <LinearLayout
+        android:layout_below="@+id/buttoncreateaccount"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/third"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:textStyle="bold"
+            android:autoSizeTextType="uniform"
+            android:textColor="@color/colorGray"
+            android:layout_margin="5dp"
+            android:textSize="17dp"
+            android:id="@+id/alreadyregisteredtextv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="already_registered" />
+
+        <TextView
+            android:autoSizeTextType="uniform"
+            android:id="@+id/logintext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="logIn"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
