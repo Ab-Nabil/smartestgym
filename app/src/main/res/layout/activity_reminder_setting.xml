@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/mainprofilebackground"
+    tools:context=".Profiles.ReminderSettingActivity">
+    <RelativeLayout
+        android:layout_alignParentTop="true"
+        android:id="@+id/firstlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/backrow"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:id="@+id/remindersettingBackRow"
+            />
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="20dp"
+            android:layout_below="@id/remindersettingBackRow"
+            android:id="@+id/profileicons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:id="@+id/homelogo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:scaleType="center"
+                android:src="@drawable/settinglogotitle" />
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/homelogo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="SETTING"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/profileicons"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/profiledata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_alignParentStart="true"
+                android:id="@+id/defuserimg"
+                android:layout_width="105dp"
+                android:layout_height="105dp"
+                android:layout_centerHorizontal="true"
+                android:background="@android:color/transparent"
+                android:scaleType="centerInside"
+                android:src="@drawable/defuserimage" />
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/defuserimg"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/usernamev"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="user name"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_below="@+id/firstlayout"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="30dp"
+        android:id="@+id/secondlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <RelativeLayout
+            android:layout_alignParentTop="true"
+            android:paddingTop="10dp"
+            android:background="#E9E9E9"
+            android:id="@+id/settinginfotitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:paddingLeft="15dp"
+                android:textSize="15sp"
+                android:layout_centerInParent="true"
+                android:textColor="@color/colorGray"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="REMINDER"
+                />
+        </RelativeLayout>
+        <ImageView
+            android:paddingEnd="25dp"
+            android:paddingBottom="25dp"
+            android:scaleType="fitEnd"
+            android:src="@drawable/plusremindersetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

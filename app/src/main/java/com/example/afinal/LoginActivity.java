@@ -10,8 +10,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.afinal.Profiles.MainProfileActivity;
+
 public class LoginActivity extends AppCompatActivity {
 
+    public String username;
     //Declaration EditTexts
     EditText loginEmail, loginPassword;
     //Declaration Button
@@ -23,8 +26,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_login );
 
+
         loginEmail = (EditText) findViewById(R.id.loginEmail);
         loginPassword = (EditText) findViewById(R.id.loginPassword);
+
 
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
         signUpText = (TextView) findViewById(R.id.signUpText);
@@ -44,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast toast=Toast. makeText(LoginActivity.this,"Successfully LogIn",Toast. LENGTH_SHORT);
                     toast.show ();
                     //User Logged in Successfully Launch You home screen activity
-                    Intent intent=new Intent(LoginActivity.this,ProfileActivity.class);
+                    Intent intent=new Intent(LoginActivity.this, MainProfileActivity.class);
                     startActivity(intent);
                     //finish();
                 }
@@ -79,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         else {
-                if (passwordValue.length() > 5) {
+                if (passwordValue.length() >7) {
                     valid = true;
                     loginPassword.setError(null);
                     loginEmail.setError(null);

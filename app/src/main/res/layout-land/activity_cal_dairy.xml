@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/mainprofilebackground"
+    tools:context=".Profiles.CaloriesPlan.CalDairyActivity">
+    <RelativeLayout
+        android:layout_alignParentTop="true"
+        android:id="@+id/firstlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/backrow"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:id="@+id/dairyBackRow"
+            />
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/dairyBackRow"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/profiledata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_alignParentStart="true"
+                android:id="@+id/defuserimg"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:background="@android:color/transparent"
+                android:scaleType="centerInside"
+                android:src="@drawable/defuserimage" />
+
+            <TextView
+                android:paddingTop="15dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/defuserimg"
+                android:layout_alignParentEnd="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="DAIRY"
+                android:textColor="@color/colorWhite"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_below="@+id/firstlayout"
+        android:layout_centerInParent="true"
+        android:id="@+id/secondlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/dairyimage"
+            />
+
+    </RelativeLayout>
+</RelativeLayout>

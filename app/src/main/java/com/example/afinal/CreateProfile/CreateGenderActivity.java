@@ -17,14 +17,14 @@ public class CreateGenderActivity extends AppCompatActivity implements View.OnCl
 
     ImageView gendermaleimage;
     ImageView genderfemaleimage;
-    ImageView genderlogorow;
+    ImageView genderForwardrow;
     TextView gendermaletext,genderfemaletext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_create_gender );
 
-        genderlogorow=(ImageView)findViewById(R.id.genderLogoRow);
+        genderForwardrow=(ImageView)findViewById(R.id.genderForwardRow);
         gendermaletext=(TextView)findViewById(R.id.genderMaleText);
         genderfemaletext=(TextView)findViewById(R.id.genderFemaleText);
         gendermaleimage=(ImageView) findViewById(R.id.genderMaleImage);
@@ -41,10 +41,7 @@ public class CreateGenderActivity extends AppCompatActivity implements View.OnCl
             case R.id.genderMaleImage: {
                 gendermaleimage.setImageResource(R.drawable.gendermaleaccept);
                 genderfemaleimage.setImageResource(R.drawable.genderfemale);
-                Snackbar.make(gendermaletext, "User is male! ", Snackbar.LENGTH_LONG).show();
-                gendermaletext.setTextColor (R.color.colorPrimary);
-                genderfemaletext.setTextColor ( R.color.colorBlack );
-                genderlogorow.setOnClickListener(new View.OnClickListener() {
+                genderForwardrow.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent=new Intent(CreateGenderActivity.this, CreateWeightActivity.class);
@@ -57,10 +54,7 @@ public class CreateGenderActivity extends AppCompatActivity implements View.OnCl
             case R.id.genderFemaleImage:{
                 genderfemaleimage.setImageResource(R.drawable.genderfemaleaccept);
                 gendermaleimage.setImageResource(R.drawable.gendermale);
-                genderfemaletext.setTextColor (R.color.colorPrimary);
-                gendermaletext.setTextColor ( R.color.colorWhite );
-                Snackbar.make(genderfemaletext, "User is female! ", Snackbar.LENGTH_LONG).show();
-                genderlogorow.setOnClickListener(new View.OnClickListener() {
+                genderForwardrow.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent=new Intent(CreateGenderActivity.this, CreateWeightActivity.class);

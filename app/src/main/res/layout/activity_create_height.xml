@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/createprofilebackground"
+    tools:context=".CreateProfile.CreateHeightActivity">
+
+    <ImageView
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/backrow"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/heightBackRow"
+        />
+    <RelativeLayout
+        android:layout_below="@+id/heightBackRow"
+        android:id="@+id/heightTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        >
+
+        <TextView
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignStart="@+id/heightp3"
+            android:layout_marginStart="20dp"
+            android:id="@+id/textcreate"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CREATE YOUR PROFILE"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:textColor="@color/colorWhite"
+            />
+        <ImageView
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cp3"
+            android:id="@+id/heightp3"
+            />
+        <TextView
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What is"
+            android:textColor="@color/colorWhite"
+            android:layout_below="@id/heightp3"
+            android:textSize="20dp"
+            android:layout_marginStart="20dp"
+            android:id="@+id/whatis"
+            />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_alignParentStart="true"
+            android:textSize="40dp"
+            android:gravity="start"
+            android:textStyle="bold"
+            android:layout_marginStart="20dp"
+            android:layout_below="@+id/whatis"
+            android:textColor="@color/colorWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="YOUR HEIGHT ?"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/heightForm"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/heightForwardRow"
+        android:layout_below="@+id/heightTitle"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        >
+        <ImageView
+            android:id="@+id/heightImage"
+            android:src="@drawable/heightimage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_centerInParent="true"
+            android:layout_margin="5dp" />
+        <EditText
+
+            android:id="@+id/heightEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/enterdata"
+            android:hint="ENTER YOUR HEIGHT....{CM}"
+            android:inputType="number"
+
+            android:layout_centerInParent="true"
+            android:layout_margin="5dp"
+            android:layout_below="@+id/heightImage"
+
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorGray"
+            android:autoSizeTextType="uniform"
+            />
+
+
+    </RelativeLayout>
+    <ImageView
+        android:layout_margin="10dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/forwardrow"
+        android:id="@+id/heightForwardRow"
+        />
+
+</RelativeLayout>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.afinal">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -9,21 +11,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreateProfile.CreateWeightActivity"></activity>
+        <activity android:name=".Profiles.CaloriesPlan.CalVegetablesActivity"></activity>
+        <activity android:name=".Profiles.CaloriesPlan.CalFruitsActivity" />
+        <activity android:name=".Profiles.CaloriesPlan.CalDairyActivity" />
+        <activity android:name=".Profiles.CaloriesPlan.CalFatsActivity" />
+        <activity android:name=".Profiles.CaloriesPlan.CalCarbsActivity" />
+        <activity android:name=".Profiles.CaloriesPlan.CalProteinActivity" />
+        <activity android:name=".Profiles.EditProfSettingActivity" />
+        <activity android:name=".Profiles.ReminderSettingActivity" />
+        <activity android:name=".Profiles.FitLevSettingActivity" />
+        <activity android:name=".Profiles.ProgressMenuActivity">
+        </activity>
+        <activity android:name=".Profiles.SettingMenuActivity" />
+        <activity android:name=".Profiles.ProfileMenuActivity" />
+        <activity android:name=".Profiles.MealMenuActivity" />
+        <activity android:name=".Profiles.HomeWorkoutActivity" />
+        <activity android:name=".Profiles.gymWorkoutActivity" />
+        <activity android:name=".Profiles.MainProfileActivity" />
+        <activity android:name=".CreateProfile.CreateActiveLevelActivity" />
+        <activity android:name=".CreateProfile.CreateFitLevelActivity" />
+        <activity android:name=".CreateProfile.CreateBdateActivity" />
+        <activity android:name=".CreateProfile.CreateHeightActivity" />
+        <activity android:name=".CreateProfile.CreateWeightActivity" />
         <activity android:name=".CreateProfile.CreateGenderActivity" />
-        <activity android:name=".ProfileActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".WelcomeActivity" />
         <activity android:name=".OnBoardActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

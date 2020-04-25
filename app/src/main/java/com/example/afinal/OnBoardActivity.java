@@ -12,7 +12,7 @@ import android.widget.ViewFlipper;
 public class OnBoardActivity extends AppCompatActivity {
     ViewFlipper viewFlipper;
     ViewFlipper viewFlipper2;
-    Button skip;
+    Button skip,next;
     private float lastX;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
