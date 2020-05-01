@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Final</string>
+    <string name="cntrol_your_own_fitness_routine_nwhere_ever_you_are">Cntrol your own fitness Routine\nWhere ever you are.</string>
+    <string name="feel_better_like_never_before_nstart_today">Feel better like never before\nstart today.</string>
+    <string name="your_health">Your Health</string>
+    <string name="todo">TODO</string>
+    <string name="skip">SKIP</string>
+    <string name="your_style">Your Style</string>
+    <string name="transform">TRANSFORM</string>
+    <string name="your_life">Your Life</string>
+    <string name="create_your_own_fitness_routine_nwhere_ever_you_are">Create your own fitness Routine\nWhere ever you are.</string>
+
 </resources>
