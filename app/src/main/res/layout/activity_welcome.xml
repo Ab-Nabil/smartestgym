@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,6 +7,7 @@
     tools:context=".WelcomeActivity">
 
     <ImageView
+        android:layout_marginBottom="-10dp"
         android:src="@drawable/helloimage"
         android:scaleType="fitXY"
         android:layout_width="match_parent"
@@ -17,9 +17,10 @@
         />
 
     <Button
+        android:layout_height="45dp"
         android:id="@+id/buttoncreateaccount"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_marginTop="-10dp"
         android:layout_centerInParent="true"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
@@ -34,7 +35,7 @@
         android:layout_centerInParent="true"
         android:layout_below="@+id/buttoncreateaccount"
         android:layout_margin="20dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         />
     <LinearLayout
         android:layout_below="@+id/ortext"
@@ -48,8 +49,8 @@
         <TextView
             android:autoSizeTextType="uniform"
             android:textColor="@color/colorBlack"
-            android:layout_margin="5dp"
-            android:textSize="17dp"
+            android:layout_margin="3dp"
+            android:textSize="17sp"
             android:id="@+id/alreadyregisteredtextv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,7 +61,7 @@
             android:id="@+id/logintext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:text="Login"
             android:textColor="@color/colorLightPrimary"
             android:textSize="20sp"

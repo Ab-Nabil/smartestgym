@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,7 +17,6 @@
                 android:layout_height="match_parent"
                 >
                 <ImageView
-                    android:layout_marginBottom="5dp"
                     android:layout_alignParentTop="true"
                     android:id="@+id/onboardimage1"
                     android:layout_width="match_parent"
@@ -29,7 +27,9 @@
                     android:contentDescription="TODO" />
                 <RelativeLayout
                     android:id="@+id/onboardtexts1"
-                    android:layout_margin="40dp"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="40dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -42,7 +42,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="45sp"
-                        android:text="@string/transform"
+                        android:text="TRANSFORM"
                         />
                     <TextView
                         android:id="@+id/on1t2"
@@ -53,7 +53,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="normal"
                         android:textSize="35sp"
-                        android:text="@string/your_life"
+                        android:text="Your Life"
                         />
                     <TextView
                         android:layout_marginTop="10dp"
@@ -65,7 +65,7 @@
                         android:textColor="@color/colorWhite"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:text="Create your own fitness Routine\nWhere ever you are."
                         />
                 </RelativeLayout>
@@ -75,7 +75,6 @@
                 android:layout_height="match_parent"
                 >
                 <ImageView
-                    android:layout_marginBottom="5dp"
                     android:layout_alignParentTop="true"
                     android:id="@+id/onboardimage2"
                     android:layout_width="match_parent"
@@ -86,7 +85,9 @@
                     />
                 <RelativeLayout
                     android:id="@+id/onboardtexts2"
-                    android:layout_margin="40dp"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="40dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -98,7 +99,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:textSize="45dp"
+                        android:textSize="45sp"
                         android:text="TRANSFORM"
                         />
                     <TextView
@@ -110,7 +111,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="normal"
                         android:textSize="35sp"
-                        android:text="@string/your_health"
+                        android:text="Your Health"
                         />
                     <TextView
                         android:layout_marginTop="10dp"
@@ -122,7 +123,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="@string/feel_better_like_never_before_nstart_today"
+                        android:text="Feel better like never before\nstart today."
                         />
                 </RelativeLayout>
 
@@ -132,18 +133,18 @@
                 android:layout_height="match_parent"
                 >
                 <ImageView
-                    android:layout_marginBottom="5dp"
                     android:layout_alignParentTop="true"
                     android:id="@+id/onboardimage3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/onboardimage2"
                     android:layout_above="@+id/onboardtexts3"
-                    android:scaleType="fitXY"
-                    android:contentDescription="@string/todo" />
+                    android:scaleType="fitXY" />
                 <RelativeLayout
                     android:id="@+id/onboardtexts3"
-                    android:layout_margin="40dp"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="40dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -167,7 +168,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="normal"
                         android:textSize="35dp"
-                        android:text="@string/your_style"
+                        android:text="Your Style"
                         />
                     <TextView
                         android:layout_marginTop="10dp"
@@ -179,7 +180,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="@string/cntrol_your_own_fitness_routine_nwhere_ever_you_are"
+                        android:text="Cntrol your own fitness Routine\nWhere ever you are."
                         />
                 </RelativeLayout>
 
@@ -203,8 +204,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/p1"
-                    android:contentDescription="@string/todo" />
+                    android:src="@drawable/p1" />
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -217,8 +217,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/p3"
-                    android:contentDescription="@string/todo" />
+                    android:src="@drawable/p3" />
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -231,8 +230,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/p2"
-                    android:contentDescription="@string/todo" />
+                    android:src="@drawable/p2" />
             </RelativeLayout>
         </ViewFlipper>
         <Button
@@ -244,7 +242,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:text="@string/skip"
+            android:text="SKIP"
             android:textColor="@color/colorWhite"
             android:textSize="20sp" />
 </RelativeLayout>

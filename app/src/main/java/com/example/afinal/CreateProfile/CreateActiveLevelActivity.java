@@ -1,12 +1,13 @@
 package com.example.afinal.CreateProfile;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.Profiles.MainProfileActivity;
 import com.example.afinal.R;
@@ -19,40 +20,47 @@ public class CreateActiveLevelActivity extends AppCompatActivity implements View
     Button lightActive;
     Button Active;
     Button veryActive;
+    boolean correctChoose = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_active_level);
-        aLForwardRow=(ImageView)findViewById(R.id.aLForwardRow);
-        aLBackRow=(ImageView)findViewById(R.id.aLBackRow);
-        notActive=(Button) findViewById(R.id.notActive);
-        lightActive=(Button) findViewById(R.id.lightActive);
-        Active=(Button)findViewById(R.id.Active);
-        veryActive=(Button)findViewById(R.id.veryActive);
+        aLForwardRow = findViewById(R.id.aLForwardRow);
+        aLBackRow = findViewById(R.id.aLBackRow);
+        notActive = findViewById(R.id.notActive);
+        lightActive = findViewById(R.id.lightActive);
+        Active = findViewById(R.id.Active);
+        veryActive = findViewById(R.id.veryActive);
 
         notActive.setOnClickListener(this);
         lightActive.setOnClickListener(this);
         Active.setOnClickListener(this);
         veryActive.setOnClickListener(this);
         aLBackRow.setOnClickListener(this);
+        aLForwardRow.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.aLForwardRow: {
+                if (correctChoose) {
+                    Intent intent = new Intent(CreateActiveLevelActivity.this, MainProfileActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast toast = Toast.makeText(CreateActiveLevelActivity.this, "Empty Value", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                break;
+
+            }
             case R.id.notActive: {
                 notActive.setBackgroundResource(R.drawable.tnvactive);
                 lightActive.setBackgroundResource(R.drawable.lactive);
                 Active.setBackgroundResource(R.drawable.active);
                 veryActive.setBackgroundResource(R.drawable.vactive);
-                aLForwardRow.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent=new Intent(CreateActiveLevelActivity.this, MainProfileActivity.class);
-                        startActivity(intent);
-                    }
-                });
+                correctChoose = true;
                 break;
             }
 
@@ -61,14 +69,8 @@ public class CreateActiveLevelActivity extends AppCompatActivity implements View
                 notActive.setBackgroundResource(R.drawable.nvactive);
                 Active.setBackgroundResource(R.drawable.active);
                 veryActive.setBackgroundResource(R.drawable.vactive);
+                correctChoose = true;
 
-                aLForwardRow.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent=new Intent(CreateActiveLevelActivity.this, MainProfileActivity.class);
-                        startActivity(intent);
-                    }
-                });
                 break;
             }
 
@@ -77,13 +79,8 @@ public class CreateActiveLevelActivity extends AppCompatActivity implements View
                 lightActive.setBackgroundResource(R.drawable.lactive);
                 notActive.setBackgroundResource(R.drawable.nvactive);
                 veryActive.setBackgroundResource(R.drawable.vactive);
-                aLForwardRow.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent=new Intent(CreateActiveLevelActivity.this, MainProfileActivity.class);
-                        startActivity(intent);
-                    }
-                });
+                correctChoose = true;
+
                 break;
             }
 
@@ -92,19 +89,15 @@ public class CreateActiveLevelActivity extends AppCompatActivity implements View
                 lightActive.setBackgroundResource(R.drawable.lactive);
                 Active.setBackgroundResource(R.drawable.active);
                 notActive.setBackgroundResource(R.drawable.nvactive);
-                aLForwardRow.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent=new Intent(CreateActiveLevelActivity.this, MainProfileActivity.class);
-                        startActivity(intent);
-                    }
-                });
+                correctChoose = true;
+
                 break;
             }
 
             case R.id.aLBackRow:{
-                Intent intent=new Intent(CreateActiveLevelActivity.this, CreateFitLevelActivity.class);
-                startActivity(intent);
+                onBackPressed();
+                //Intent intent=new Intent(CreateActiveLevelActivity.this, CreateFitLevelActivity.class);
+                //startActivity(intent);
             }
         }
     }

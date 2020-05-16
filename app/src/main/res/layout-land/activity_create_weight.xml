@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,17 +7,18 @@
     tools:context=".CreateProfile.CreateWeightActivity">
 
     <ImageView
+        android:layout_width="20dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_width="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
         android:layout_height="20dp"
         android:src="@drawable/backrow"
-        android:layout_marginLeft="10dp"
+        android:scaleType="fitXY"
         android:layout_marginTop="10dp"
         android:id="@+id/weightBackRow"
         />
     <RelativeLayout
-        android:layout_margin="5dp"
+        android:layout_marginTop="5dp"
         android:layout_below="@+id/weightBackRow"
         android:id="@+id/weightTitle"
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
         >
 
         <TextView
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:id="@+id/textcreate"
             android:gravity="center"
             android:layout_width="wrap_content"
@@ -38,8 +38,10 @@
             android:textColor="@color/colorWhite"
             />
         <ImageView
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="5dp"
-            android:layout_below="@+id/textcreate"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -48,20 +50,21 @@
             android:id="@+id/weightp2"
             />
         <TextView
+            android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="What is"
             android:textColor="@color/colorWhite"
             android:layout_below="@id/weightp2"
-            android:textSize="20sp"
-            android:layout_marginLeft="15dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
             android:id="@+id/whatis"
             />
         <TextView
-            android:textSize="30sp"
+            android:layout_marginLeft="20dp"
             android:gravity="start"
             android:textStyle="bold"
-            android:layout_marginLeft="15dp"
+            android:textSize="25sp"
             android:layout_below="@+id/whatis"
             android:textColor="@color/colorWhite"
             android:layout_width="match_parent"
@@ -79,26 +82,24 @@
         >
 
         <ImageView
-            android:layout_alignParentTop="true"
-            android:id="@+id/weightImage"
-            android:src="@drawable/weightimage"
             android:layout_width="200dp"
             android:layout_height="150dp"
             android:scaleType="centerInside"
-android:layout_centerInParent="true"
-            android:layout_margin="5dp"/>
+            android:id="@+id/weightImage"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_margin="5dp"
+            android:src="@drawable/weightimage" />
         <EditText
+            android:layout_below="@+id/weightImage"
             android:id="@+id/weightEditText"
+            android:hint="ENTER YOUR WEIGHT....{KG}"
+
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:background="@drawable/enterdata"
-
-            android:hint="ENTER YOUR WEIGHT....{KG}"
             android:inputType="number"
-
-            android:layout_below="@+id/weightImage"
             android:layout_centerInParent="true"
-
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold"

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,16 +7,18 @@
     tools:context=".CreateProfile.CreateHeightActivity">
 
     <ImageView
+        android:layout_width="20dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
         android:src="@drawable/backrow"
-        android:layout_marginLeft="10dp"
+        android:scaleType="fitXY"
         android:layout_marginTop="10dp"
         android:id="@+id/heightBackRow"
         />
     <RelativeLayout
+        android:layout_margin="5dp"
         android:layout_below="@+id/heightBackRow"
         android:id="@+id/heightTitle"
         android:layout_width="match_parent"
@@ -26,77 +27,86 @@
         >
 
         <TextView
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
             android:id="@+id/textcreate"
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CREATE YOUR PROFILE"
             android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textColor="@color/colorWhite"
             />
         <ImageView
-            android:layout_margin="5dp"
-            android:layout_below="@+id/textcreate"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:src="@drawable/p3"
             android:id="@+id/genderp3"
             />
+        <TextView
+            android:id="@+id/whatis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/genderp3"
+            android:layout_marginLeft="15dp"
+            android:text="What is"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:layout_margin="5dp"
             android:textSize="25sp"
-            android:gravity="center"
+            android:layout_below="@+id/whatis"
             android:textStyle="bold"
-            android:layout_below="@+id/genderp3"
+            android:layout_marginLeft="15dp"
+            android:gravity="start"
             android:textColor="@color/colorWhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="YOUR\nHEIGHT ?"
+            android:text="YOUR HEIGHT ?"
             />
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_margin="5dp"
         android:id="@+id/heightForm"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/heightForwardRow"
         android:layout_below="@+id/heightTitle"
-        android:layout_centerInParent="true"
         android:gravity="center"
         >
         <ImageView
             android:id="@+id/heightImage"
             android:src="@drawable/heightimage"
-            android:layout_width="150dp"
+            android:layout_width="200dp"
             android:layout_height="150dp"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
-            android:layout_margin="5dp" />
+            android:layout_margin="5dp"
+            android:scaleType="centerInside" />
         <EditText
-            android:id="@+id/heightEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:background="@drawable/enterdata"
-            android:hint="ENTER YOUR HEIGHT....{CM}"
-            android:inputType="number"
-
             android:layout_centerInParent="true"
-            android:layout_below="@+id/heightImage"
-            android:layout_alignParentBottom="true"
-
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/colorGray"
             android:autoSizeTextType="uniform"
+
+            android:id="@+id/heightEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@+id/heightImage"
+            android:background="@drawable/enterdata"
+            android:hint="ENTER YOUR HEIGHT....{CM}"
+
+            android:inputType="number"
             />
 
 

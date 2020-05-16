@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/createprofilebackground"
     tools:context=".CreateProfile.CreateFitLevelActivity">
     <ImageView
+        android:layout_width="20dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
         android:src="@drawable/backrow"
-        android:layout_marginLeft="10dp"
+        android:scaleType="fitXY"
         android:layout_marginTop="10dp"
         android:id="@+id/fitLevelBackRow"
         />
 
     <RelativeLayout
+        android:layout_marginTop="5dp"
         android:id="@+id/fitLevelTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,36 +30,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="20dp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
             android:text="CREATE YOUR PROFILE"
             android:textColor="@color/colorWhite"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
-
         <ImageView
+            android:layout_width="110dp"
             android:layout_alignParentTop="true"
-            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
             android:id="@+id/flp5"
-            android:layout_width="wrap_content"
+            android:layout_marginBottom="10dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:src="@drawable/cp5" />
         <TextView
-            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="start"
+            android:textSize="10sp"
             android:id="@+id/whatis"
-            android:layout_width="wrap_content"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
             android:text="What is"
             android:textColor="@color/colorWhite"
-            android:textSize="15dp"
-            android:layout_marginLeft="20dp"
             android:layout_below="@+id/flp5"
             />
 
         <TextView
+            android:textSize="20sp"
             android:layout_below="@+id/whatis"
             android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
@@ -67,7 +74,6 @@
             android:gravity="start"
             android:text="YOUR FITNESS LEVEL ?"
             android:textColor="@color/colorWhite"
-            android:textSize="25dp"
             android:textStyle="bold" />
     </RelativeLayout>
 
@@ -84,35 +90,35 @@
         <Button
             android:id="@+id/fitLevelBeginner"
             android:layout_alignParentLeft="true"
-            android:layout_width="500dp"
+            android:layout_width="450dp"
             android:layout_above="@+id/fitLevelIntermediate"
-            android:layout_height="65dp"
+            android:layout_height="55dp"
             android:background="@drawable/bfit"
             android:layout_marginBottom="5dp"/>
         <Button
             android:layout_centerInParent="true"
             android:id="@+id/fitLevelIntermediate"
             android:layout_alignParentRight="true"
-            android:layout_width="500dp"
-            android:layout_height="65dp"
+            android:layout_width="450dp"
+            android:layout_height="55dp"
             android:background="@drawable/ifit"
             android:layout_marginBottom="5dp"/>
         <Button
             android:id="@+id/fitLevelAdvanced"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/fitLevelIntermediate"
-            android:layout_width="500dp"
-            android:layout_height="65dp"
+            android:layout_width="450dp"
+            android:layout_height="55dp"
             android:background="@drawable/afit"
             />
 
     </RelativeLayout>
     <ImageView
-        android:layout_margin="5dp"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="5dp"
         android:src="@drawable/forwardrow"
         android:id="@+id/fitLevelForwardRow"
         />

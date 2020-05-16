@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,46 +7,48 @@
     tools:context=".Profiles.SettingMenuActivity">
 
     <RelativeLayout
-        android:layout_above="@+id/secondlayout"
-        android:layout_alignParentTop="true"
         android:id="@+id/firstlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:layout_above="@+id/secondlayout"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="-5dp">
 
         <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/backrow"
+            android:scaleType="fitXY"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
+            android:src="@drawable/backrow"
             android:id="@+id/settingBackRow"
             />
+
         <RelativeLayout
-            android:layout_marginTop="10dp"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="20dp"
-            android:layout_below="@id/settingBackRow"
             android:id="@+id/profileicons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="5dp">
+            android:layout_below="@id/settingBackRow"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp">
 
             <ImageView
                 android:id="@+id/homelogo"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentStart="true"
                 android:scaleType="center"
                 android:src="@drawable/settinglogotitle" />
+
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="5dp"
                 android:layout_toEndOf="@+id/homelogo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:gravity="start"
                 android:text="SETTING"
                 android:textColor="@color/colorWhite"
@@ -55,37 +56,37 @@
                 android:textStyle="bold" />
 
         </RelativeLayout>
+
         <RelativeLayout
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/profileicons"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
             android:id="@+id/profiledata"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
+            android:layout_below="@+id/profileicons"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp">
 
             <ImageView
-                android:layout_centerInParent="true"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="15dp"
-                android:layout_alignParentStart="true"
                 android:id="@+id/defuserimg"
                 android:layout_width="105dp"
                 android:layout_height="105dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
                 android:layout_centerHorizontal="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="20dp"
                 android:background="@android:color/transparent"
                 android:scaleType="centerInside"
                 android:src="@drawable/defuserimage" />
 
             <TextView
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/defuserimg"
-                android:layout_alignParentEnd="true"
                 android:id="@+id/usernamev"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/defuserimg"
                 android:gravity="start"
                 android:text="user name"
                 android:textColor="@color/colorWhite"
@@ -94,6 +95,7 @@
 
         </RelativeLayout>
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_centerInParent="true"
         android:layout_marginTop="5dp"

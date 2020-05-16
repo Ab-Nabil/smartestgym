@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/createprofilebackground"
+    tools:context=".CreateProfile.CreateFitLevelActivity">
+
+    <ImageView
+        android:id="@+id/fLBackRow"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/backrow" />
+
+    <RelativeLayout
+        android:id="@+id/fLTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fLBackRow"
+        android:layout_marginTop="25dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textcreate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="25dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:text="CREATE YOUR PROFILE"
+            android:textColor="@color/colorWhite"
+            android:textSize="27sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/fLp5"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/cp5" />
+
+        <TextView
+            android:id="@+id/whatis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fLp5"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="15dp"
+            android:text="What is"
+            android:textColor="@color/colorWhite"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/whatis"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="25dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="start"
+            android:text="YOUR FITNESS\nLEVEL ?"
+            android:textColor="@color/colorWhite"
+            android:textSize="45sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/fLForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/flForwardRow"
+        android:layout_below="@+id/fLTitle"
+        android:layout_centerInParent="true">
+
+        <Button
+            android:id="@+id/fitLevelBeginner"
+            android:layout_width="450dp"
+            android:layout_height="80dp"
+            android:layout_above="@+id/fitLevelIntermediate"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bfit" />
+
+        <Button
+            android:id="@+id/fitLevelIntermediate"
+            android:layout_width="450dp"
+            android:layout_height="80dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/ifit"
+            android:textColor="@color/colorPrimary" />
+
+        <Button
+            android:id="@+id/fitLevelAdvanced"
+            android:layout_width="450dp"
+            android:layout_height="80dp"
+            android:layout_below="@+id/fitLevelIntermediate"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/afit" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/flForwardRow"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:src="@drawable/forwardrow" />
+</RelativeLayout>

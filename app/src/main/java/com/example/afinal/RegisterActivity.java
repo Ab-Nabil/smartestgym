@@ -1,8 +1,5 @@
 package com.example.afinal;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,13 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.afinal.CreateProfile.CreateGenderActivity;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText register_username, register_email, register_password, register_confirmpassword;
@@ -39,11 +35,11 @@ public class RegisterActivity extends AppCompatActivity {
         register_username = findViewById(R.id.register_userName);
         register_email = findViewById(R.id.register_email);
         register_password = findViewById(R.id.register_password);
-        register_buttoncreateaccount = (Button) findViewById(R.id.register_buttonCreateAccount);
-        register_profilePic = (ImageButton) findViewById(R.id.register_profilePic);
+        register_buttoncreateaccount = findViewById(R.id.register_buttonCreateAccount);
+        register_profilePic = findViewById(R.id.register_profilePic);
 
         //this method used to set Login TextView click event
-        register_login = (TextView) findViewById(R.id.register_login);
+        register_login = findViewById(R.id.register_login);
         register_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,28 +69,15 @@ public class RegisterActivity extends AppCompatActivity {
                     Intent intent = new Intent(RegisterActivity.this, CreateGenderActivity.class);
                     startActivity(intent);
                     //finish();
+                } else if (!Validate()) {
+                    Toast toast = Toast.makeText(RegisterActivity.this, "UnSuccessfully SignUp", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
             }
         }
         );
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GALLERY_CODE && requestCode == resultCode && data != null) {
-             mImageUri=data.getData();
-            CropImage.activity()
-                    .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1,1)
-                    .start(RegisterActivity.this);
-        }
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE)
-        {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-
-        }
-    }
 
     private boolean Validate() {
         boolean valid = false;
@@ -116,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
                 register_password.setError("Empty value");
             if (confirmpasswordvalue.isEmpty())
                 register_confirmpassword.setError("Empty value");
-
+            return valid;
         } else {
             if (usernamevalue.length() <= 4) {
                 valid = false;

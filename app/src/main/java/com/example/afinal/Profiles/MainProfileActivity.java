@@ -1,22 +1,20 @@
 package com.example.afinal.Profiles;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.R;
-import com.example.afinal.RegisterActivity;
 import com.google.android.material.navigation.NavigationView;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
+
 
 public class MainProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -29,40 +27,43 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
     boolean a0=true;boolean a1=true;boolean a2=true;boolean a3=true;boolean a4=true;boolean a5=true;boolean a6=true;boolean a7=true;
     private static final int GALLERY_CODE=1;
     private Uri mImageUri;
+    boolean doubleBackToExitPressedOnce = false;
+    boolean navi_open = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_profile);
 
-        menuicon=(Button) findViewById(R.id.menuicon);
-        logobackrow=(ImageView)findViewById(R.id.menuBackRow);
-        cupcounter=(TextView) findViewById(R.id.cupcounterr);
-        usernamev=(TextView)findViewById(R.id.usernamev);
-        checkcorrect=(ImageView)findViewById(R.id.checkcorrect);
-        defuserimg=(ImageView)findViewById(R.id.defuserimg);
-        gym=(ImageView)findViewById(R.id.gymworkout);
-        home=(ImageView)findViewById(R.id.homeworkout);
-        glss1=(ImageView) findViewById(R.id.glss1);
-        glss2=(ImageView) findViewById(R.id.glss2);
-        glss3=(ImageView) findViewById(R.id.glss3);
-        glss4=(ImageView) findViewById(R.id.glss4);
-        glss5=(ImageView) findViewById(R.id.glss5);
-        glss6=(ImageView) findViewById(R.id.glss6);
-        glss7=(ImageView) findViewById(R.id.glss7);
-        glss8=(ImageView) findViewById(R.id.glss8);
-        navigationn=(NavigationView)findViewById(R.id.navigation);
+        menuicon = findViewById(R.id.menuicon);
+        logobackrow = findViewById(R.id.menuBackRow);
+        cupcounter = findViewById(R.id.cupcounterr);
+        usernamev = findViewById(R.id.usernamev);
+        checkcorrect = findViewById(R.id.checkcorrect);
+        defuserimg = findViewById(R.id.defuserimg);
+        gym = findViewById(R.id.gymworkout);
+        home = findViewById(R.id.homeworkout);
+        glss1 = findViewById(R.id.glss1);
+        glss2 = findViewById(R.id.glss2);
+        glss3 = findViewById(R.id.glss3);
+        glss4 = findViewById(R.id.glss4);
+        glss5 = findViewById(R.id.glss5);
+        glss6 = findViewById(R.id.glss6);
+        glss7 = findViewById(R.id.glss7);
+        glss8 = findViewById(R.id.glss8);
+        navigationn = findViewById(R.id.navigation);
         //  Validate VIEWS
         //  Handle Views
         menuicon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 navigationn.setVisibility(View.VISIBLE);
+                navi_open = true;
             }
         });
+
         defuserimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                     Intent galleryIntent=new Intent();
                     galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
                     galleryIntent.setType("image/*");
@@ -85,24 +86,36 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onClick(View v) {
                 navigationn.setVisibility(View.INVISIBLE);
+                navi_open = false;
             }
         });
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GALLERY_CODE && requestCode == resultCode && data != null) {
-            mImageUri=data.getData();
-            CropImage.activity()
-                    .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1,1)
-                    .start(this);
-        }
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE)
-        {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
 
+    @Override
+    public void onBackPressed() {
+        if (navi_open) {
+            navi_open = false;
+            navigationn.setVisibility(View.INVISIBLE);
+            return;
+        } else {
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed();
+                finishAffinity();
+                return;
+            } else {
+                this.doubleBackToExitPressedOnce = true;
+                Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+                new Handler().postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        doubleBackToExitPressedOnce = false;
+                    }
+                }, 2000);
+            }
+            return;
         }
+
     }
 
     @Override
@@ -241,7 +254,6 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
 
 
         }
-
 
         if(counter==8){
             checkcorrect.setVisibility(View.VISIBLE);

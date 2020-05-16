@@ -29,13 +29,13 @@
         <activity android:name=".Profiles.MealMenuActivity" />
         <activity android:name=".Profiles.HomeWorkoutActivity" />
         <activity android:name=".Profiles.gymWorkoutActivity" />
-        <activity android:name=".Profiles.MainProfileActivity" />
+        <activity android:name=".Profiles.MainProfileActivity"></activity>
         <activity android:name=".CreateProfile.CreateActiveLevelActivity" />
         <activity android:name=".CreateProfile.CreateFitLevelActivity" />
         <activity android:name=".CreateProfile.CreateBdateActivity" />
         <activity android:name=".CreateProfile.CreateHeightActivity" />
         <activity android:name=".CreateProfile.CreateWeightActivity" />
-        <activity android:name=".CreateProfile.CreateGenderActivity" />
+        <activity android:name=".CreateProfile.CreateGenderActivity"></activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".WelcomeActivity" />

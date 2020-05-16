@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
-    android:background="@drawable/lgbackground"
-    >
+    android:background="@drawable/lgbackground">
 
     <ImageView
         android:src="@drawable/loginimage"
@@ -30,14 +28,14 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/loginEmail"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:background="@drawable/emaillogo"
             android:hint="Email address..."
             android:textColorHint="@color/colorGray"
             android:inputType="textEmailAddress"
             android:paddingLeft="45dp"
             android:layout_marginBottom="5dp"
-            android:textSize="15dp"
+            android:textSize="10sp"
             android:textStyle="bold"/>
 
         <EditText
@@ -50,13 +48,14 @@
             android:layout_width="match_parent"
             android:layout_below="@+id/loginEmail"
             android:layout_centerHorizontal="true"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:background="@drawable/passwordlogo"
             android:inputType="textPassword"
             android:paddingLeft="45dp"
-            android:textSize="15dp" />
+            android:textSize="10sp" />
 
         <TextView
+            android:textSize="10sp"
             android:layout_marginTop="10dp"
             android:textStyle="normal"
             android:autoSizeTextType="uniform"
@@ -89,8 +88,8 @@
         android:textColor="@color/colorPrimaryDark"
         android:layout_centerInParent="true"
         android:layout_below="@+id/buttonLogin"
-        android:layout_margin="10dp"
-        android:textSize="20dp"
+        android:layout_margin="5dp"
+        android:textSize="15sp"
         />
     <LinearLayout
         android:layout_below="@+id/ortext"
@@ -103,7 +102,6 @@
 
         <TextView
             android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"
             android:autoSizeTextType="uniform"
             android:textColor="@color/colorBlack"
             android:textSize="15sp"

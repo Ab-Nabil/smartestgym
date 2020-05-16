@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:windowSoftInputMode="stateHidden|adjustResize"
     tools:context=".RegisterActivity"
     android:background="@drawable/lgbackground">
     <RelativeLayout
@@ -15,13 +15,14 @@
         >
 
         <ImageButton
+            android:layout_width="wrap_content"
             android:layout_centerInParent="true"
             android:background="@android:color/transparent"
             android:id="@+id/register_profilePic"
             android:layout_centerHorizontal="true"
             android:scaleType="centerInside"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="120dp"
+            android:src="@drawable/defuserimage"
             />
         <TextView
             android:gravity="center"
@@ -48,6 +49,7 @@
         >
 
         <EditText
+            android:imeOptions="actionSend"
             android:layout_alignParentTop="true"
             android:textColor="@color/colorBlack"
             android:autoSizeTextType="uniform"
@@ -62,6 +64,7 @@
             android:textSize="15dp"
             android:textStyle="bold"/>
         <EditText
+            android:imeOptions="actionSend"
             android:layout_below="@+id/register_userName"
             android:textColor="@color/colorBlack"
             android:autoSizeTextType="uniform"
@@ -76,6 +79,7 @@
             android:textSize="15dp"
             android:textStyle="bold"/>
         <EditText
+            android:imeOptions="actionSend"
             android:layout_marginBottom="10dp"
             android:textColor="@color/colorBlack"
             android:autoSizeTextType="uniform"
@@ -90,6 +94,8 @@
             android:paddingLeft="30dp"
             android:textSize="15dp" />
         <EditText
+
+            android:imeOptions="actionDone"
             android:textColor="@color/colorBlack"
             android:autoSizeTextType="uniform"
             android:textStyle="bold"
