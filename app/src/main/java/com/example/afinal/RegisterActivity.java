@@ -13,9 +13,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.CreateProfile.CreateGenderActivity;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class RegisterActivity extends AppCompatActivity {
     EditText register_username, register_email, register_password, register_confirmpassword;
+    User user;
     //Declaration ImageButton
     ImageButton register_profilePic;
     private static final int GALLERY_CODE = 1;
@@ -24,11 +28,46 @@ public class RegisterActivity extends AppCompatActivity {
     Button register_buttoncreateaccount;
     TextView register_login;
 
+    FirebaseDatabase sgdatabase;
+    DatabaseReference sgreference;
+    //private FirebaseAuth sgAuth;
+
+    //get values from EditText fields
+    String usernamevalue;
+    String emailvalue;
+    String passwordvalue;
+    String confirmpasswordvalue;
+    // --> final int[] mId = {0};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        // --> mId[0]=0;
+        // Initialize Firebase Auth
+        //  sgAuth = FirebaseAuth.getInstance();
+        //sgdatabase=FirebaseDatabase.getInstance();
+        //sgreference=sgdatabase.getReference().child("User");
+        user = new User();
+        /*sgreference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    // --> mId[0] = (int) snapshot.getChildrenCount();
+                }
+                else {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+         */
 
         //this method is used to connect XML views to its Objects
         register_confirmpassword = findViewById(R.id.register_confirmPassword);
@@ -63,9 +102,31 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (Validate()) {
+                    //sgreference.child(String.valueOf(mId[0] +1)).setValue(user);
+
+        /*            sgAuth.createUserWithEmailAndPassword(emailvalue, passwordvalue)
+                            .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d("done", "createUserWithEmail:success");
+                                        FirebaseUser user = sgAuth.getCurrentUser();
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w("fail", "createUserWithEmail:failure", task.getException());
+                                        Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    // ...
+                                }
+                            });
+
+         */
                     Toast toast = Toast.makeText(RegisterActivity.this, "Successfully SignUp", Toast.LENGTH_SHORT);
                     toast.show();
-                    //User Logged in Successfully Launch You home screen activity
+                    //User signed up Successfully Launch You home screen activity
                     Intent intent = new Intent(RegisterActivity.this, CreateGenderActivity.class);
                     startActivity(intent);
                     //finish();
@@ -81,13 +142,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     private boolean Validate() {
         boolean valid = false;
-
-        //get values from EditText fields
-        String usernamevalue = register_username.getText().toString();
-        String emailvalue = register_email.getText().toString();
-        String passwordvalue = register_password.getText().toString();
-        String confirmpasswordvalue = register_confirmpassword.getText().toString();
-
+        usernamevalue = register_username.getText().toString();
+        emailvalue = register_email.getText().toString();
+        passwordvalue = register_password.getText().toString();
+        confirmpasswordvalue = register_confirmpassword.getText().toString();
 
         if (usernamevalue.isEmpty() || emailvalue.isEmpty() || passwordvalue.isEmpty() || confirmpasswordvalue.isEmpty()) {
             valid = false;
@@ -138,6 +196,9 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         }
+        user.setUserEmail(emailvalue);
+        user.setUserName(usernamevalue);
+        user.setUserPassword(passwordvalue);
         return valid;
     }
 }

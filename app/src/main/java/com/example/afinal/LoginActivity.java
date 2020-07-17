@@ -1,7 +1,5 @@
 package com.example.afinal;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,8 +8,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.afinal.Profiles.MainProfileActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.afinal.Profiles.MainProfileActivity;
 public class LoginActivity extends AppCompatActivity {
 
     public String username;
@@ -21,18 +20,21 @@ public class LoginActivity extends AppCompatActivity {
     Button buttonLogin;
     TextView signUpText;
 
+
+    //Get values from EditText fields
+    String emailValue;
+    String passwordValue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_login );
 
+        loginEmail = findViewById(R.id.loginEmail);
+        loginPassword = findViewById(R.id.loginPassword);
+        buttonLogin = findViewById(R.id.buttonLogin);
+        signUpText = findViewById(R.id.signUpText);
 
-        loginEmail = (EditText) findViewById(R.id.loginEmail);
-        loginPassword = (EditText) findViewById(R.id.loginPassword);
-
-
-        buttonLogin = (Button) findViewById(R.id.buttonLogin);
-        signUpText = (TextView) findViewById(R.id.signUpText);
         //this method used to set signup TextView click event
         signUpText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(validate ()){
+
                     Toast toast=Toast. makeText(LoginActivity.this,"Successfully LogIn",Toast. LENGTH_SHORT);
                     toast.show ();
                     //User Logged in Successfully Launch You home screen activity
@@ -59,18 +62,16 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 */
 
-
             }
         } );
     }
     private boolean validate() {
         boolean valid = false;
         //Get values from EditText fields
-        String emailValue = loginEmail.getText().toString();
-        String passwordValue = loginPassword.getText().toString();
+        emailValue = loginEmail.getText().toString();
+        passwordValue = loginPassword.getText().toString();
 
         //Handling validation for Valid Email field
-
         if (emailValue.isEmpty()||passwordValue.isEmpty()) {
             valid = false;
             if (emailValue.isEmpty())
