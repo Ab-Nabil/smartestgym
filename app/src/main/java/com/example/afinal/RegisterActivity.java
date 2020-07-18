@@ -12,15 +12,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.afinal.CreateProfile.CreateActiveLevelActivity;
 import com.example.afinal.CreateProfile.CreateGenderActivity;
-
-import java.io.Serializable;
+import com.google.gson.Gson;
 
 
 public class RegisterActivity extends AppCompatActivity {
     EditText register_username, register_email, register_password, register_confirmpassword;
+
+    //for passing Object
     User user = new User();
+    Gson gson = new Gson();
+    String userDO = gson.toJson(user);
+
     //Declaration ImageButton
     ImageButton register_profilePic;
     private static final int GALLERY_CODE = 1;
@@ -43,8 +46,6 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
 
-        // Initialize Firebase Auth
-        //  sgAuth = FirebaseAuth.getInstance();
 
         //this method is used to connect XML views to its Objects
         register_confirmpassword = findViewById(R.id.register_confirmPassword);
@@ -79,6 +80,9 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (Validate()) {
+                    user.setUserEmail(emailvalue);
+                    user.setUserName(usernamevalue);
+                    user.setUserPassword(passwordvalue);
         /*            sgAuth.createUserWithEmailAndPassword(emailvalue, passwordvalue)
                             .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -103,8 +107,7 @@ public class RegisterActivity extends AppCompatActivity {
                     toast.show();
                     //User signed up Successfully Launch You home screen activity
                     Intent intent = new Intent(RegisterActivity.this, CreateGenderActivity.class);
-                    Intent intent1 = new Intent(RegisterActivity.this, CreateActiveLevelActivity.class);
-                    intent1.putExtra("userRO", (Serializable) user);
+                    intent.putExtra("userRO", userDO);
                     startActivity(intent);
                     //finish();
                 } else if (!Validate()) {
@@ -118,7 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     private boolean Validate() {
-        boolean valid = false;
+        boolean valid;
         usernamevalue = register_username.getText().toString();
         emailvalue = register_email.getText().toString();
         passwordvalue = register_password.getText().toString();
@@ -174,9 +177,6 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         }
-        user.setUserEmail(emailvalue);
-        user.setUserName(usernamevalue);
-        user.setUserPassword(passwordvalue);
 
         return valid;
     }

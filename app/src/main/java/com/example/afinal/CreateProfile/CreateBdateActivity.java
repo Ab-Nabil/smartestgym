@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.R;
 import com.example.afinal.User;
+import com.google.gson.Gson;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -23,6 +23,7 @@ public class CreateBdateActivity extends AppCompatActivity implements View.OnCli
     ImageView bDateBackRow;
     ImageView bDateForwardRow;
     EditText bDateValue;
+    User user;
     final Calendar myCalendar = Calendar.getInstance();
     final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
         @Override
@@ -35,14 +36,14 @@ public class CreateBdateActivity extends AppCompatActivity implements View.OnCli
         }
     };
 
-    User user;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_create_bdate );
 
-        user = new User();
+        Gson gson = new Gson();
+        String userDO = getIntent().getStringExtra("userHO");
+        user = gson.fromJson(userDO, User.class);
 
         bDateValue = findViewById(R.id.bDateEditText);
         bDateBackRow = findViewById(R.id.bDateBackRow);
@@ -73,8 +74,9 @@ public class CreateBdateActivity extends AppCompatActivity implements View.OnCli
                 } else {
                     user.setUserBirthDate(bdatevalue);
                     Intent intent = new Intent(CreateBdateActivity.this, CreateFitLevelActivity.class);
-                    Intent intent1 = new Intent(CreateBdateActivity.this, CreateActiveLevelActivity.class);
-                    intent1.putExtra("userBDO", (Serializable) user);
+                    Gson gson1 = new Gson();
+                    String userDO = gson1.toJson(user);
+                    intent.putExtra("userBDO", userDO);
                     startActivity(intent);
                 }
                 break;

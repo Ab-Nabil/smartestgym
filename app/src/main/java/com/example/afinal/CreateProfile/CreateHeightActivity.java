@@ -10,8 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.R;
 import com.example.afinal.User;
-
-import java.io.Serializable;
+import com.google.gson.Gson;
 
 public class CreateHeightActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -25,14 +24,16 @@ public class CreateHeightActivity extends AppCompatActivity implements View.OnCl
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_create_height );
 
+        Gson gson = new Gson();
+        String userDO = getIntent().getStringExtra("userWO");
+        user = gson.fromJson(userDO, User.class);
+
         heightValue = findViewById(R.id.heightEditText);
         heightbackRow = findViewById(R.id.heightBackRow);
         heightforwardRow = findViewById(R.id.heightForwardRow);
 
         heightbackRow.setOnClickListener(this);
         heightforwardRow.setOnClickListener(this);
-        user = new User();
-
     }
 
     @Override
@@ -46,8 +47,9 @@ public class CreateHeightActivity extends AppCompatActivity implements View.OnCl
                 } else {
                     user.setUserHeight(heightvalue);
                     Intent intent = new Intent(CreateHeightActivity.this, CreateBdateActivity.class);
-                    Intent intent1 = new Intent(CreateHeightActivity.this, CreateActiveLevelActivity.class);
-                    intent1.putExtra("userHO", (Serializable) user);
+                    Gson gson1 = new Gson();
+                    String userDO = gson1.toJson(user);
+                    intent.putExtra("userHO", userDO);
                     startActivity(intent);
                 }
                 break;

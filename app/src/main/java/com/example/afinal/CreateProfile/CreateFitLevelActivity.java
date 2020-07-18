@@ -11,8 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.R;
 import com.example.afinal.User;
-
-import java.io.Serializable;
+import com.google.gson.Gson;
 
 public class CreateFitLevelActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,7 +29,9 @@ public class CreateFitLevelActivity extends AppCompatActivity implements View.On
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_create_fit_level );
 
-        user = new User();
+        Gson gson = new Gson();
+        String userDO = getIntent().getStringExtra("userBDO");
+        user = gson.fromJson(userDO, User.class);
 
         flForwardRow = findViewById(R.id.flForwardRow);
         fLBackRow = findViewById(R.id.fLBackRow);
@@ -52,8 +53,9 @@ public class CreateFitLevelActivity extends AppCompatActivity implements View.On
                 if (correctChoose) {
                     user.setUserFitLevel(fitLevelValue);
                     Intent intent = new Intent(CreateFitLevelActivity.this, CreateActiveLevelActivity.class);
-                    Intent intent1 = new Intent(CreateFitLevelActivity.this, CreateActiveLevelActivity.class);
-                    intent1.putExtra("userFLO", (Serializable) user);
+                    Gson gson1 = new Gson();
+                    String userDO = gson1.toJson(user);
+                    intent.putExtra("userFLO", userDO);
                     startActivity(intent);
                 } else {
                     Toast toast = Toast.makeText(CreateFitLevelActivity.this, "Empty Value", Toast.LENGTH_SHORT);

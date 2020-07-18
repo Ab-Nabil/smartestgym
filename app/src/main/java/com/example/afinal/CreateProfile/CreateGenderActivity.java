@@ -10,8 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.R;
 import com.example.afinal.User;
-
-import java.io.Serializable;
+import com.google.gson.Gson;
 
 public class CreateGenderActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -19,14 +18,18 @@ public class CreateGenderActivity extends AppCompatActivity implements View.OnCl
     ImageView genderfemaleimage;
     ImageView genderForwardrow;
     boolean correctChoose = false;
+
     User user;
     String genderValue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_create_gender );
 
-        user = new User();
+        Gson gson = new Gson();
+        String userDO = getIntent().getStringExtra("userRO");
+        user = gson.fromJson(userDO, User.class);
 
         genderForwardrow = findViewById(R.id.genderForwardRow);
         gendermaleimage = findViewById(R.id.genderMaleImage);
@@ -44,8 +47,11 @@ public class CreateGenderActivity extends AppCompatActivity implements View.OnCl
                 if (correctChoose) {
                     user.setUserGender(genderValue);
                     Intent intent = new Intent(CreateGenderActivity.this, CreateWeightActivity.class);
-                    Intent intent1 = new Intent(CreateGenderActivity.this, CreateActiveLevelActivity.class);
-                    intent1.putExtra("userGO", (Serializable) user);
+
+                    Gson gson1 = new Gson();
+                    String userDO = gson1.toJson(user);
+                    intent.putExtra("userGO", userDO);
+
                     startActivity(intent);
                 } else {
                     Toast toast = Toast.makeText(CreateGenderActivity.this, "Empty Value", Toast.LENGTH_SHORT);

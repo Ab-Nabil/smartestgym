@@ -10,20 +10,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.R;
 import com.example.afinal.User;
-
-import java.io.Serializable;
+import com.google.gson.Gson;
 
 public class CreateWeightActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView weightbackRow;
     ImageView weightforwardRow;
     EditText weightValue;
     User user;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_create_weight );
-        user = new User();
+
+        Gson gson = new Gson();
+        String userDO = getIntent().getStringExtra("userGO");
+        user = gson.fromJson(userDO, User.class);
 
         weightValue = findViewById(R.id.weightEditText);
         weightbackRow = findViewById(R.id.weightBackRow);
@@ -44,8 +45,9 @@ public class CreateWeightActivity extends AppCompatActivity implements View.OnCl
                 } else {
                     user.setUserWeight(weightvalue);
                     Intent intent = new Intent(CreateWeightActivity.this, CreateHeightActivity.class);
-                    Intent intent1 = new Intent(CreateWeightActivity.this, CreateActiveLevelActivity.class);
-                    intent1.putExtra("userWO", (Serializable) user);
+                    Gson gson1 = new Gson();
+                    String userDO = gson1.toJson(user);
+                    intent.putExtra("userWO", userDO);
                     startActivity(intent);
                 }
                 break;

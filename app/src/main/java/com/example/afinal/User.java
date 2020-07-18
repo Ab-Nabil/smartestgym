@@ -1,7 +1,9 @@
 package com.example.afinal;
 
-public class User {
-    int userID;
+import java.io.Serializable;
+
+public class User implements Serializable {
+    String userID;
     String userName;
     String userEmail;
     String userPassword;
@@ -66,11 +68,11 @@ public class User {
         this.userBirthDate = userBirthDate;
     }
 
-    public int getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
