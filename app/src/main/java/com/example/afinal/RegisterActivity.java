@@ -12,14 +12,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.afinal.CreateProfile.CreateActiveLevelActivity;
 import com.example.afinal.CreateProfile.CreateGenderActivity;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.Serializable;
 
 
 public class RegisterActivity extends AppCompatActivity {
     EditText register_username, register_email, register_password, register_confirmpassword;
-    User user;
+    User user = new User();
     //Declaration ImageButton
     ImageButton register_profilePic;
     private static final int GALLERY_CODE = 1;
@@ -28,8 +29,6 @@ public class RegisterActivity extends AppCompatActivity {
     Button register_buttoncreateaccount;
     TextView register_login;
 
-    FirebaseDatabase sgdatabase;
-    DatabaseReference sgreference;
     //private FirebaseAuth sgAuth;
 
     //get values from EditText fields
@@ -37,37 +36,15 @@ public class RegisterActivity extends AppCompatActivity {
     String emailvalue;
     String passwordvalue;
     String confirmpasswordvalue;
-    // --> final int[] mId = {0};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // --> mId[0]=0;
+
         // Initialize Firebase Auth
         //  sgAuth = FirebaseAuth.getInstance();
-        //sgdatabase=FirebaseDatabase.getInstance();
-        //sgreference=sgdatabase.getReference().child("User");
-        user = new User();
-        /*sgreference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    // --> mId[0] = (int) snapshot.getChildrenCount();
-                }
-                else {
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-         */
 
         //this method is used to connect XML views to its Objects
         register_confirmpassword = findViewById(R.id.register_confirmPassword);
@@ -102,8 +79,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (Validate()) {
-                    //sgreference.child(String.valueOf(mId[0] +1)).setValue(user);
-
         /*            sgAuth.createUserWithEmailAndPassword(emailvalue, passwordvalue)
                             .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -128,6 +103,8 @@ public class RegisterActivity extends AppCompatActivity {
                     toast.show();
                     //User signed up Successfully Launch You home screen activity
                     Intent intent = new Intent(RegisterActivity.this, CreateGenderActivity.class);
+                    Intent intent1 = new Intent(RegisterActivity.this, CreateActiveLevelActivity.class);
+                    intent1.putExtra("userRO", (Serializable) user);
                     startActivity(intent);
                     //finish();
                 } else if (!Validate()) {
@@ -193,12 +170,14 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else {
                     valid = true;
+
                 }
             }
         }
         user.setUserEmail(emailvalue);
         user.setUserName(usernamevalue);
         user.setUserPassword(passwordvalue);
+
         return valid;
     }
 }

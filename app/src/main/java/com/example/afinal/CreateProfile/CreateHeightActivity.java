@@ -9,12 +9,16 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.R;
+import com.example.afinal.User;
+
+import java.io.Serializable;
 
 public class CreateHeightActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView heightbackRow;
     ImageView heightforwardRow;
     EditText heightValue;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,8 @@ public class CreateHeightActivity extends AppCompatActivity implements View.OnCl
 
         heightbackRow.setOnClickListener(this);
         heightforwardRow.setOnClickListener(this);
+        user = new User();
+
     }
 
     @Override
@@ -34,11 +40,14 @@ public class CreateHeightActivity extends AppCompatActivity implements View.OnCl
         switch (v.getId()){
             case R.id.heightForwardRow: {
                 //get values from EditText fields
-                String weightvalue = heightValue.getText().toString();
-                if (weightvalue.isEmpty()) {
+                String heightvalue = heightValue.getText().toString();
+                if (heightvalue.isEmpty()) {
                     heightValue.setHint("Empty Value");
                 } else {
+                    user.setUserHeight(heightvalue);
                     Intent intent = new Intent(CreateHeightActivity.this, CreateBdateActivity.class);
+                    Intent intent1 = new Intent(CreateHeightActivity.this, CreateActiveLevelActivity.class);
+                    intent1.putExtra("userHO", (Serializable) user);
                     startActivity(intent);
                 }
                 break;

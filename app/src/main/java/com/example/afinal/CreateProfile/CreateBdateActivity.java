@@ -11,7 +11,9 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.R;
+import com.example.afinal.User;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -30,14 +32,17 @@ public class CreateBdateActivity extends AppCompatActivity implements View.OnCli
             myCalendar.set(Calendar.MONTH, month);
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             updateLabel();
-
         }
     };
+
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_create_bdate );
+
+        user = new User();
 
         bDateValue = findViewById(R.id.bDateEditText);
         bDateBackRow = findViewById(R.id.bDateBackRow);
@@ -66,7 +71,10 @@ public class CreateBdateActivity extends AppCompatActivity implements View.OnCli
                 if (bdatevalue.isEmpty()) {
                     bDateValue.setHint("Empty Value");
                 } else {
+                    user.setUserBirthDate(bdatevalue);
                     Intent intent = new Intent(CreateBdateActivity.this, CreateFitLevelActivity.class);
+                    Intent intent1 = new Intent(CreateBdateActivity.this, CreateActiveLevelActivity.class);
+                    intent1.putExtra("userBDO", (Serializable) user);
                     startActivity(intent);
                 }
                 break;

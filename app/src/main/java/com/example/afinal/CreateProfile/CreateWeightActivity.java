@@ -9,16 +9,22 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.R;
+import com.example.afinal.User;
+
+import java.io.Serializable;
 
 public class CreateWeightActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView weightbackRow;
     ImageView weightforwardRow;
     EditText weightValue;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_create_weight );
+        user = new User();
+
         weightValue = findViewById(R.id.weightEditText);
         weightbackRow = findViewById(R.id.weightBackRow);
         weightforwardRow = findViewById(R.id.weightForwardRow);
@@ -36,7 +42,10 @@ public class CreateWeightActivity extends AppCompatActivity implements View.OnCl
                 if (weightvalue.isEmpty()) {
                     weightValue.setHint("Empty Value");
                 } else {
+                    user.setUserWeight(weightvalue);
                     Intent intent = new Intent(CreateWeightActivity.this, CreateHeightActivity.class);
+                    Intent intent1 = new Intent(CreateWeightActivity.this, CreateActiveLevelActivity.class);
+                    intent1.putExtra("userWO", (Serializable) user);
                     startActivity(intent);
                 }
                 break;
