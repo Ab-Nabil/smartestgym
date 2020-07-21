@@ -11,10 +11,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.Profiles.MainProfileActivity;
 import com.example.afinal.R;
-import com.example.afinal.User;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
+
+import java.util.HashMap;
 
 public class CreateActiveLevelActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -25,22 +30,18 @@ public class CreateActiveLevelActivity extends AppCompatActivity implements View
     Button Active;
     Button veryActive;
     boolean correctChoose = false;
-    User user;
-    String activityLevelValue;
-    FirebaseDatabase sgdatabase;
-    DatabaseReference sgreference;
+
+    FirebaseFirestore firestore;
+    FirebaseAuth fAuth;
+    HashMap<String, String> user;
+    String userID;
+
+    String gender,weight,height,age,fit,active,username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_active_level);
-
-        sgdatabase = FirebaseDatabase.getInstance();
-        sgreference = sgdatabase.getReference();
-        Gson gson = new Gson();
-        String userDO = getIntent().getStringExtra("userFLO");
-        user = gson.fromJson(userDO, User.class);
-
         aLForwardRow = findViewById(R.id.aLForwardRow);
         aLBackRow = findViewById(R.id.aLBackRow);
         notActive = findViewById(R.id.notActive);
@@ -54,6 +55,32 @@ public class CreateActiveLevelActivity extends AppCompatActivity implements View
         veryActive.setOnClickListener(this);
         aLBackRow.setOnClickListener(this);
         aLForwardRow.setOnClickListener(this);
+
+        //firestore
+        firestore= FirebaseFirestore.getInstance();
+        fAuth = FirebaseAuth.getInstance();
+        userID = fAuth.getCurrentUser().getUid();
+        Intent intent = getIntent();
+        Bundle bundle=getIntent().getExtras();
+
+        gender =bundle.getString("g");
+        weight =bundle.getString("w");
+        height =bundle.getString("h");
+        age = bundle.getString("age");
+        fit = bundle.getString("fit");
+        username = bundle.getString("username");
+
+
+
+        user = new HashMap<>();
+        user.put("username",username);
+        user.put("gender",gender);
+        user.put("weight",weight);
+        user.put("height",height);
+        user.put("age",age);
+        user.put("fit",fit);
+
+
     }
 
     @Override
@@ -61,9 +88,16 @@ public class CreateActiveLevelActivity extends AppCompatActivity implements View
         switch (v.getId()){
             case R.id.aLForwardRow: {
                 if (correctChoose) {
-                    user.setUserActivityLevel(activityLevelValue);
                     Intent intent = new Intent(CreateActiveLevelActivity.this, MainProfileActivity.class);
-                    sgreference.child("User").setValue(user);
+                    DocumentReference documentReference = firestore.collection("users").document(userID);
+
+                    user.put("active",active);
+                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(CreateActiveLevelActivity.this, "Welcome on Board", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                     startActivity(intent);
                 } else {
                     Toast toast = Toast.makeText(CreateActiveLevelActivity.this, "Empty Value", Toast.LENGTH_SHORT);
@@ -73,52 +107,51 @@ public class CreateActiveLevelActivity extends AppCompatActivity implements View
 
             }
             case R.id.notActive: {
-                activityLevelValue = "Not_Active";
                 notActive.setBackgroundResource(R.drawable.tnvactive);
                 lightActive.setBackgroundResource(R.drawable.lactive);
                 Active.setBackgroundResource(R.drawable.active);
                 veryActive.setBackgroundResource(R.drawable.vactive);
                 correctChoose = true;
+                active = "1";
                 break;
             }
 
             case R.id.lightActive:{
-                activityLevelValue = "Light_Active";
                 lightActive.setBackgroundResource(R.drawable.tlactive);
                 notActive.setBackgroundResource(R.drawable.nvactive);
                 Active.setBackgroundResource(R.drawable.active);
                 veryActive.setBackgroundResource(R.drawable.vactive);
                 correctChoose = true;
+                active = "2";
 
                 break;
             }
 
             case R.id.Active:{
-                activityLevelValue = "Active";
                 Active.setBackgroundResource(R.drawable.tactive);
                 lightActive.setBackgroundResource(R.drawable.lactive);
                 notActive.setBackgroundResource(R.drawable.nvactive);
                 veryActive.setBackgroundResource(R.drawable.vactive);
                 correctChoose = true;
+                active = "3";
 
                 break;
             }
 
             case R.id.veryActive:{
-                activityLevelValue = "Very_Active";
                 veryActive.setBackgroundResource(R.drawable.tvactive);
                 lightActive.setBackgroundResource(R.drawable.lactive);
                 Active.setBackgroundResource(R.drawable.active);
                 notActive.setBackgroundResource(R.drawable.nvactive);
                 correctChoose = true;
+                active = "4";
 
                 break;
             }
 
             case R.id.aLBackRow:{
                 onBackPressed();
-                //Intent intent=new Intent(CreateActiveLevelActivity.this, CreateFitLevelActivity.class);
-                //startActivity(intent);
+
             }
         }
     }

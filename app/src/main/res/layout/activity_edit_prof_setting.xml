@@ -82,7 +82,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/defuserimg"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/usernamev"
+                android:id="@+id/usernamevSettings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
@@ -214,6 +214,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="00 YEARS"
+                    android:id="@+id/agevalueSettings"
                 />
             <ImageView
                 android:id="@+id/ageeditsetting"
@@ -276,6 +277,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:text="00 Kg"
+                android:id="@+id/weightSettings"
                 />
             <ImageView
                 android:id="@+id/sweditsetting"
@@ -397,6 +399,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:text="000 cm"
+                android:id="@+id/heightSettings"
                 />
             <ImageView
                 android:id="@+id/heighteditsetting"

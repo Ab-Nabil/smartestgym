@@ -9,7 +9,8 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.R;
-import com.example.afinal.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 
 public class CreateHeightActivity extends AppCompatActivity implements View.OnClickListener {
@@ -17,16 +18,17 @@ public class CreateHeightActivity extends AppCompatActivity implements View.OnCl
     ImageView heightbackRow;
     ImageView heightforwardRow;
     EditText heightValue;
-    User user;
+    String mHeight;
+
+    FirebaseAuth fAuth;
+    FirebaseFirestore firestore;
+
+    String gender,weight,username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_create_height );
-
-        Gson gson = new Gson();
-        String userDO = getIntent().getStringExtra("userWO");
-        user = gson.fromJson(userDO, User.class);
 
         heightValue = findViewById(R.id.heightEditText);
         heightbackRow = findViewById(R.id.heightBackRow);
@@ -34,22 +36,35 @@ public class CreateHeightActivity extends AppCompatActivity implements View.OnCl
 
         heightbackRow.setOnClickListener(this);
         heightforwardRow.setOnClickListener(this);
+
+
+        Bundle bundle=getIntent().getExtras();
+
+        gender = bundle.getString("g");
+        weight = bundle.getString("w");
+        username = bundle.getString("username");
+
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.heightForwardRow: {
-                //get values from EditText fields
-                String heightvalue = heightValue.getText().toString();
-                if (heightvalue.isEmpty()) {
-                    heightValue.setHint("Empty Value");
-                } else {
-                    user.setUserHeight(heightvalue);
-                    Intent intent = new Intent(CreateHeightActivity.this, CreateBdateActivity.class);
-                    Gson gson1 = new Gson();
-                    String userDO = gson1.toJson(user);
-                    intent.putExtra("userHO", userDO);
+                mHeight = heightValue.getText().toString();
+
+                if (mHeight.isEmpty()) {
+                    heightValue.setError("Enter Your Height");
+                }
+                else {
+                    Intent intent;
+                    intent = new Intent(CreateHeightActivity.this, CreateBdateActivity.class);
+                    intent.putExtra("h",mHeight);
+                    intent.putExtra("g",gender);
+                    intent.putExtra("w",weight);
+                    intent.putExtra("username",username);
+
+
                     startActivity(intent);
                 }
                 break;
@@ -57,8 +72,6 @@ public class CreateHeightActivity extends AppCompatActivity implements View.OnCl
 
             case R.id.heightBackRow:{
                 onBackPressed();
-                //Intent intent=new Intent(CreateHeightActivity.this,CreateWeightActivity.class);
-                //startActivity(intent);
             }
             break;
         }

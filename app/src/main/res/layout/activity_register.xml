@@ -6,6 +6,14 @@
     android:windowSoftInputMode="stateHidden|adjustResize"
     tools:context=".RegisterActivity"
     android:background="@drawable/lgbackground">
+    <ProgressBar
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        android:id="@+id/regPrograssBar"
+
+        />
     <RelativeLayout
         android:layout_margin="5dp"
         android:layout_alignParentTop="true"

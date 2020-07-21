@@ -10,7 +10,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.R;
-import com.example.afinal.User;
 import com.google.gson.Gson;
 
 public class CreateFitLevelActivity extends AppCompatActivity implements View.OnClickListener {
@@ -21,17 +20,13 @@ public class CreateFitLevelActivity extends AppCompatActivity implements View.On
     Button fitLevelIntermediate;
     Button fitLevelAdvanced;
     boolean correctChoose = false;
-    User user;
-    String fitLevelValue;
+    String fit;
+    String gender,weight,height,age,username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_create_fit_level );
-
-        Gson gson = new Gson();
-        String userDO = getIntent().getStringExtra("userBDO");
-        user = gson.fromJson(userDO, User.class);
 
         flForwardRow = findViewById(R.id.flForwardRow);
         fLBackRow = findViewById(R.id.fLBackRow);
@@ -44,6 +39,15 @@ public class CreateFitLevelActivity extends AppCompatActivity implements View.On
         fitLevelAdvanced.setOnClickListener(this);
         fLBackRow.setOnClickListener(this);
         flForwardRow.setOnClickListener(this);
+
+        Bundle bundle=getIntent().getExtras();
+
+        gender =bundle.getString("g");
+        weight =bundle.getString("w");
+        height = bundle.getString("h");
+        age = bundle.getString("age");
+        username = bundle.getString("username");
+
     }
 
     @Override
@@ -51,11 +55,13 @@ public class CreateFitLevelActivity extends AppCompatActivity implements View.On
         switch (v.getId()){
             case R.id.flForwardRow: {
                 if (correctChoose) {
-                    user.setUserFitLevel(fitLevelValue);
                     Intent intent = new Intent(CreateFitLevelActivity.this, CreateActiveLevelActivity.class);
-                    Gson gson1 = new Gson();
-                    String userDO = gson1.toJson(user);
-                    intent.putExtra("userFLO", userDO);
+                    intent.putExtra("h",height);
+                    intent.putExtra("g",gender);
+                    intent.putExtra("w",weight);
+                    intent.putExtra("age",age);
+                    intent.putExtra("fit",fit);
+                    intent.putExtra("username",username);
                     startActivity(intent);
                 } else {
                     Toast toast = Toast.makeText(CreateFitLevelActivity.this, "Empty Value", Toast.LENGTH_SHORT);
@@ -64,32 +70,29 @@ public class CreateFitLevelActivity extends AppCompatActivity implements View.On
                 break;
             }
             case R.id.fitLevelBeginner: {
-                fitLevelValue = "Beginner";
                 fitLevelBeginner.setBackgroundResource(R.drawable.tbfit);
                 fitLevelIntermediate.setBackgroundResource(R.drawable.ifit);
                 fitLevelAdvanced.setBackgroundResource(R.drawable.afit);
-
+                fit = "1";
                 correctChoose = true;
                 break;
             }
 
             case R.id.fitLevelIntermediate:{
-                fitLevelValue = "Intermediate";
                 fitLevelIntermediate.setBackgroundResource(R.drawable.tifit);
                 fitLevelBeginner.setBackgroundResource(R.drawable.bfit);
                 fitLevelAdvanced.setBackgroundResource(R.drawable.afit);
                 correctChoose = true;
-
+                fit = "2";
                 break;
             }
 
             case R.id.fitLevelAdvanced:{
-                fitLevelValue = "Advanced";
                 fitLevelAdvanced.setBackgroundResource(R.drawable.tafit);
                 fitLevelBeginner.setBackgroundResource(R.drawable.bfit);
                 fitLevelIntermediate.setBackgroundResource(R.drawable.ifit);
                 correctChoose = true;
-
+                fit = "3";
                 break;
             }
 

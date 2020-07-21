@@ -3,7 +3,8 @@
     package="com.example.afinal">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:largeHeap="true"
         android:hardwareAccelerated="false"
@@ -12,7 +13,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
         <activity android:name=".Profiles.CaloriesPlan.CalVegetablesActivity"></activity>
         <activity android:name=".Profiles.CaloriesPlan.CalFruitsActivity" />
         <activity android:name=".Profiles.CaloriesPlan.CalDairyActivity" />
@@ -29,6 +31,21 @@
         <activity android:name=".Profiles.MealMenuActivity" />
         <activity android:name=".Profiles.HomeWorkoutActivity" />
         <activity android:name=".Profiles.gymWorkoutActivity" />
+        <activity android:name=".Train.PlanA.PlanAHomeActivity"/>
+        <activity android:name=".Train.PlanB.PlanBHomeActivity"/>
+        <activity android:name=".Admin.AdminUserActivity"></activity>
+        <activity android:name=".Admin.MainAdminActivity">
+
+        </activity>
+        <activity android:name=".Train.VideoActivity" />
+        <activity android:name=".Train.Inter_ContainerActivity" />
+        <activity android:name=".Train.IntermediateActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Profiles.MainProfileActivity"></activity>
         <activity android:name=".CreateProfile.CreateActiveLevelActivity" />
         <activity android:name=".CreateProfile.CreateFitLevelActivity" />
@@ -41,11 +58,7 @@
         <activity android:name=".WelcomeActivity" />
         <activity android:name=".OnBoardActivity" />
         <activity android:name=".SplashActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

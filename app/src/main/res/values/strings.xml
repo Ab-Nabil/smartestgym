@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">Final</string>
+    <string name="app_name">Smart Gym</string>
+    <string name="intermediate">Intermediate</string>
 
 </resources>

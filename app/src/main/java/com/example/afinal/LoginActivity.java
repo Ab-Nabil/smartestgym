@@ -5,95 +5,74 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.Profiles.MainProfileActivity;
-public class LoginActivity extends AppCompatActivity {
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
-    public String username;
-    //Declaration EditTexts
-    EditText loginEmail, loginPassword;
-    //Declaration Button
-    Button buttonLogin;
-    TextView signUpText;
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
+    FirebaseAuth mAuth;
+    EditText mEmail,mPassword;
+    Button mLogin;
 
-    //Get values from EditText fields
-    String emailValue;
-    String passwordValue;
-
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate ( savedInstanceState );
-        setContentView ( R.layout.activity_login );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
 
-        loginEmail = findViewById(R.id.loginEmail);
-        loginPassword = findViewById(R.id.loginPassword);
-        buttonLogin = findViewById(R.id.buttonLogin);
-        signUpText = findViewById(R.id.signUpText);
+        mAuth = FirebaseAuth.getInstance();
+        mEmail = findViewById(R.id.loginEmail);
+        mPassword = findViewById(R.id.loginPassword);
+        mLogin = findViewById(R.id.buttonLogin);
 
-        //this method used to set signup TextView click event
-        signUpText.setOnClickListener(new View.OnClickListener() {
+        mLogin.setOnClickListener(this);
+
+        progressBar = findViewById(R.id.logPrograssBar);
+
+    }
+
+    private void userLogin() {
+        String email = mEmail.getText().toString();
+        String password = mPassword.getText().toString();
+        progressBar.setVisibility(View.VISIBLE);
+        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    progressBar.setVisibility(View.INVISIBLE);
+                    finish();
+                    Intent intent = new Intent(LoginActivity.this, MainProfileActivity.class);
+                    //flag for clear so user can't go to login again after login
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
-        buttonLogin.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                if(validate ()){
-
-                    Toast toast=Toast. makeText(LoginActivity.this,"Successfully LogIn",Toast. LENGTH_SHORT);
-                    toast.show ();
-                    //User Logged in Successfully Launch You home screen activity
-                    Intent intent=new Intent(LoginActivity.this, MainProfileActivity.class);
-                    startActivity(intent);
-                    //finish();
-                }
-               /* else {
-                    Toast toast=Toast. makeText(LoginActivity.this,"Email or Password are not valid !",Toast. LENGTH_SHORT);
-                    toast.show ();
-                }
-                */
-
-            }
-        } );
     }
-    private boolean validate() {
-        boolean valid = false;
-        //Get values from EditText fields
-        emailValue = loginEmail.getText().toString();
-        passwordValue = loginPassword.getText().toString();
 
-        //Handling validation for Valid Email field
-        if (emailValue.isEmpty()||passwordValue.isEmpty()) {
-            valid = false;
-            if (emailValue.isEmpty())
-            loginEmail.setError("Empty Email!");
-            if (passwordValue.isEmpty())
-            loginPassword.setError("Empty password!");
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.buttonLogin:
+                userLogin();
+//                Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+//                //flag for clear so user can't go to login again after login
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(intent);
+                break;
         }
-        else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailValue).matches()) {
-            valid = false;
-            loginEmail.setError("Please enter valid email!");
-        }
-
-        else {
-                if (passwordValue.length() >7) {
-                    valid = true;
-                    loginPassword.setError(null);
-                    loginEmail.setError(null);
-                } else {
-                    valid = false;
-                    loginPassword.setError("Password is to short!");
-                }
-            }
-        return valid;
     }
 }

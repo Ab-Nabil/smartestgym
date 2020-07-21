@@ -9,7 +9,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.R;
-import com.example.afinal.User;
 import com.google.gson.Gson;
 
 public class CreateGenderActivity extends AppCompatActivity implements View.OnClickListener{
@@ -17,19 +16,14 @@ public class CreateGenderActivity extends AppCompatActivity implements View.OnCl
     ImageView gendermaleimage;
     ImageView genderfemaleimage;
     ImageView genderForwardrow;
+
+    String gender,username;
+
     boolean correctChoose = false;
-
-    User user;
-    String genderValue;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_create_gender );
-
-        Gson gson = new Gson();
-        String userDO = getIntent().getStringExtra("userRO");
-        user = gson.fromJson(userDO, User.class);
 
         genderForwardrow = findViewById(R.id.genderForwardRow);
         gendermaleimage = findViewById(R.id.genderMaleImage);
@@ -38,6 +32,10 @@ public class CreateGenderActivity extends AppCompatActivity implements View.OnCl
         gendermaleimage.setOnClickListener(this);
         genderfemaleimage.setOnClickListener(this);
         genderForwardrow.setOnClickListener(this);
+
+        Bundle bundle=getIntent().getExtras();
+        username = bundle.getString("username");
+
     }
 
     @Override
@@ -45,25 +43,25 @@ public class CreateGenderActivity extends AppCompatActivity implements View.OnCl
         switch (v.getId()) {
             case R.id.genderForwardRow: {
                 if (correctChoose) {
-                    user.setUserGender(genderValue);
+
                     Intent intent = new Intent(CreateGenderActivity.this, CreateWeightActivity.class);
 
-                    Gson gson1 = new Gson();
-                    String userDO = gson1.toJson(user);
-                    intent.putExtra("userGO", userDO);
-
+                    intent.putExtra("username",username);
+                    intent.putExtra("g",gender);
                     startActivity(intent);
-                } else {
-                    Toast toast = Toast.makeText(CreateGenderActivity.this, "Empty Value", Toast.LENGTH_SHORT);
+                }
+                else {
+                    Toast toast = Toast.makeText(CreateGenderActivity.this, "Choose your gender", Toast.LENGTH_SHORT);
                     toast.show();
                 }
+
                 break;
             }
             case R.id.genderMaleImage: {
                 gendermaleimage.setImageResource(R.drawable.gendermaleaccept);
                 genderfemaleimage.setImageResource(R.drawable.genderfemale);
                 correctChoose = true;
-                genderValue = "Male";
+                gender = "male";
                 break;
             }
 
@@ -71,7 +69,7 @@ public class CreateGenderActivity extends AppCompatActivity implements View.OnCl
                 genderfemaleimage.setImageResource(R.drawable.genderfemaleaccept);
                 gendermaleimage.setImageResource(R.drawable.gendermale);
                 correctChoose = true;
-                genderValue = "Female";
+                gender = "female";
                 break;
             }
 

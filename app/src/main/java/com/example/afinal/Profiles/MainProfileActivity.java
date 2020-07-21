@@ -10,18 +10,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.afinal.LoginActivity;
 import com.example.afinal.R;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 
 public class MainProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
+    
     Button menuicon;
     NavigationView navigationn;
     ImageView gym,home,logobackrow,defuserimg,checkcorrect;
-    TextView usernamev,cupcounter;
+    TextView usernamev,cupcounter,mStartWeight,menuusernamev;
     int counter=0;
     ImageView glss1,glss2,glss3,glss4,glss5,glss6,glss7,glss8;
     boolean a0=true;boolean a1=true;boolean a2=true;boolean a3=true;boolean a4=true;boolean a5=true;boolean a6=true;boolean a7=true;
@@ -29,15 +39,50 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
     private Uri mImageUri;
     boolean doubleBackToExitPressedOnce = false;
     boolean navi_open = false;
+
+    FirebaseUser user;
+    String userID;
+    FirebaseAuth fAuth;
+    FirebaseFirestore firestore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_profile);
 
+        fAuth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
+
+        userID = fAuth.getCurrentUser().getUid();
+
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        usernamev.setText(user.getDisplayName());
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String userEmail = user.getEmail();
+        } else {
+            // No user is signed in
+        }
+
+//        loadUserInfo();
+
+        DocumentReference documentReference = firestore.collection("users").document(userID);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                mStartWeight.setText(documentSnapshot.getString("weight"));
+                menuusernamev.setText(documentSnapshot.getString("username"));
+                usernamev.setText(documentSnapshot.getString("username"));
+            }
+        });
+
         menuicon = findViewById(R.id.menuicon);
         logobackrow = findViewById(R.id.menuBackRow);
         cupcounter = findViewById(R.id.cupcounterr);
         usernamev = findViewById(R.id.usernamev);
+
+        mStartWeight = findViewById(R.id.startweightvalue);
+
         checkcorrect = findViewById(R.id.checkcorrect);
         defuserimg = findViewById(R.id.defuserimg);
         gym = findViewById(R.id.gymworkout);
@@ -51,6 +96,9 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
         glss7 = findViewById(R.id.glss7);
         glss8 = findViewById(R.id.glss8);
         navigationn = findViewById(R.id.navigation);
+        menuusernamev =findViewById(R.id.menuusernamev);
+
+
         //  Validate VIEWS
         //  Handle Views
         menuicon.setOnClickListener(new View.OnClickListener() {
@@ -64,14 +112,12 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
         defuserimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent galleryIntent=new Intent();
-                    galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-                    galleryIntent.setType("image/*");
-                    startActivityForResult(galleryIntent, GALLERY_CODE);
-
+                Intent galleryIntent=new Intent();
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent, GALLERY_CODE);
             }
         });
-        
         glss1.setOnClickListener(this);
         glss2.setOnClickListener(this);
         glss3.setOnClickListener(this);
@@ -90,6 +136,23 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
             }
         });
     }
+
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        if (fAuth.getCurrentUser() ==null){
+//            finish();
+//            startActivity(new Intent(this, LoginActivity.class));
+//        }
+//    }
+//
+//    private void loadUserInfo() {
+//        user  = fAuth.getCurrentUser();
+//
+////        String photoUrl = user.getPhotoUrl().toString();
+////        String displayName = user.getDisplayName();
+////        usernamev.setText(displayName);
+//    }
 
     @Override
     public void onBackPressed() {

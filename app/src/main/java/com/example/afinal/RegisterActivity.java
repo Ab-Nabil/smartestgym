@@ -1,183 +1,183 @@
 package com.example.afinal;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.CreateProfile.CreateGenderActivity;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
 
 
-public class RegisterActivity extends AppCompatActivity {
-    EditText register_username, register_email, register_password, register_confirmpassword;
-
-    //for passing Object
-    User user = new User();
-    Gson gson = new Gson();
-    String userDO = gson.toJson(user);
-
-    //Declaration ImageButton
-    ImageButton register_profilePic;
-    private static final int GALLERY_CODE = 1;
-    private Uri mImageUri;
-    //Declaration Button
-    Button register_buttoncreateaccount;
-    TextView register_login;
-
-    //private FirebaseAuth sgAuth;
-
-    //get values from EditText fields
-    String usernamevalue;
-    String emailvalue;
-    String passwordvalue;
-    String confirmpasswordvalue;
-
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
+    StorageReference storageReference;
+    ProgressBar progressBar;
+    FirebaseFirestore firestore;
+    private FirebaseAuth mAuth;
+    public String userID;
+    public HashMap<String, String> user;
+    Button mRegisterBtn;
+    ImageView mProfilePic;
+    TextView mLogin;
+    EditText mUserName,mEmail,mPassword,mConfPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        initiViews();
+        progressBar = findViewById(R.id.regPrograssBar);
 
+        mAuth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
+//        storageReference = FirebaseStorage.getInstance().getReference();
+    }
 
+    private void initiViews() {
+        mProfilePic = findViewById(R.id.register_profilePic);
+        mLogin = findViewById(R.id.register_login);
+        mRegisterBtn = findViewById(R.id.register_buttonCreateAccount);
 
-        //this method is used to connect XML views to its Objects
-        register_confirmpassword = findViewById(R.id.register_confirmPassword);
-        register_username = findViewById(R.id.register_userName);
-        register_email = findViewById(R.id.register_email);
-        register_password = findViewById(R.id.register_password);
-        register_buttoncreateaccount = findViewById(R.id.register_buttonCreateAccount);
-        register_profilePic = findViewById(R.id.register_profilePic);
+        mUserName = findViewById(R.id.register_userName);
+        mEmail = findViewById(R.id.register_email);
+        mPassword = findViewById(R.id. register_password);
+        mConfPassword = findViewById(R.id.register_confirmPassword);
 
-        //this method used to set Login TextView click event
-        register_login = findViewById(R.id.register_login);
-        register_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
+        mRegisterBtn.setOnClickListener(this);
+
+        mLogin.setOnClickListener(this);
+        mProfilePic.setOnClickListener(this);
+
+    }
+
+    private void registerUser(){
+        final String usernamevalue = mUserName.getText().toString();
+        final String emailvalue = mEmail.getText().toString();
+        String passwordvalue = mPassword.getText().toString();
+        String confirmpasswordvalue = mConfPassword.getText().toString();
+
+        //firebase email&password
+        if (passwordvalue.length()>=6 && Patterns.EMAIL_ADDRESS.matcher(emailvalue).matches()) {
+            progressBar.setVisibility(View.VISIBLE);
+            mAuth.createUserWithEmailAndPassword(emailvalue, passwordvalue)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        progressBar.setVisibility(View.INVISIBLE);
+                        finish();
+                        Toast.makeText(RegisterActivity.this, "Register Successful", Toast.LENGTH_SHORT).show();
+                        userID = mAuth.getCurrentUser().getUid();
+                        Intent intent = new Intent(RegisterActivity.this, CreateGenderActivity.class);
+                        intent.putExtra("username",usernamevalue);
+                        startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+        else {
+            Toast.makeText(this, "email not valid or Password <6 ", Toast.LENGTH_SHORT).show();
+        }
+        if (usernamevalue.isEmpty()){
+            mUserName.setError("UserName required");
+            mUserName.requestFocus();
+            return;
+        }
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if (user!=null){
+            UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(usernamevalue).build()
+                    ;
+            user.updateProfile(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()){
+
+                    }
+                }
+            });
+        }
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.register_buttonCreateAccount:
+                registerUser();
+                break;
+
+            case R.id.register_profilePic:
+                Intent gallaryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(gallaryIntent,1000);
+                break;
+
+            case R.id.register_login:
                 finish();
-            }
-        });
-
-        //to upload picture from gallery
-        register_profilePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                galleryIntent.setType("image/*");
-                startActivityForResult(galleryIntent, GALLERY_CODE);
-            }
-        });
-
-        register_buttoncreateaccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Validate()) {
-                    user.setUserEmail(emailvalue);
-                    user.setUserName(usernamevalue);
-                    user.setUserPassword(passwordvalue);
-        /*            sgAuth.createUserWithEmailAndPassword(emailvalue, passwordvalue)
-                            .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
-                                        Log.d("done", "createUserWithEmail:success");
-                                        FirebaseUser user = sgAuth.getCurrentUser();
-                                    } else {
-                                        // If sign in fails, display a message to the user.
-                                        Log.w("fail", "createUserWithEmail:failure", task.getException());
-                                        Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-
-                                    // ...
-                                }
-                            });
-
-         */
-                    Toast toast = Toast.makeText(RegisterActivity.this, "Successfully SignUp", Toast.LENGTH_SHORT);
-                    toast.show();
-                    //User signed up Successfully Launch You home screen activity
-                    Intent intent = new Intent(RegisterActivity.this, CreateGenderActivity.class);
-                    intent.putExtra("userRO", userDO);
-                    startActivity(intent);
-                    //finish();
-                } else if (!Validate()) {
-                    Toast toast = Toast.makeText(RegisterActivity.this, "UnSuccessfully SignUp", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-            }
-        }
-        );
-    }
-
-
-    private boolean Validate() {
-        boolean valid;
-        usernamevalue = register_username.getText().toString();
-        emailvalue = register_email.getText().toString();
-        passwordvalue = register_password.getText().toString();
-        confirmpasswordvalue = register_confirmpassword.getText().toString();
-
-        if (usernamevalue.isEmpty() || emailvalue.isEmpty() || passwordvalue.isEmpty() || confirmpasswordvalue.isEmpty()) {
-            valid = false;
-            if (usernamevalue.isEmpty())
-                register_username.setError("Empty value");
-            if (emailvalue.isEmpty())
-                register_email.setError("Empty value");
-            if (passwordvalue.isEmpty())
-                register_password.setError("Empty value");
-            if (confirmpasswordvalue.isEmpty())
-                register_confirmpassword.setError("Empty value");
-            return valid;
-        } else {
-            if (usernamevalue.length() <= 4) {
-                valid = false;
-                register_username.setError("short username < 5");
-            } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailvalue).matches()) {
-                valid = false;
-                register_email.setError("Please enter valid email!");
-            } else if (!passwordvalue.equals(confirmpasswordvalue)) {
-                register_confirmpassword.setError("Passwords are not matching!");
-                register_confirmpassword.setFocusable(true);
-                valid = false;
-                register_password.setError("Passwords are not matching!");
-            } else if (passwordvalue.length() <= 7) {
-                valid = false;
-                register_password.setError("short password < 8");
-            }
-            else {
-                if (!passwordvalue.matches("(?=.*[0-9]).*")) {
-                    valid = false;
-                    register_password.setError("password should contain digits");
-                }
-                else if (!passwordvalue.matches("(?=.*[a-z]).*")) {
-                    valid = false;
-                    register_password.setError("password should contain lower case letter");
-                }
-                 else if (!passwordvalue.matches("(?=.*[A-Z]).*")) {
-                    valid = false;
-                    register_password.setError("password should contain upper case letter");
-                }
-                else if (!passwordvalue.matches("(?=.*[~!@#$%^&*()_/]).*")) {
-                    valid = false;
-                    register_password.setError("password should contain special character letter");
-                }
-                else {
-                    valid = true;
-
-                }
-            }
+                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                startActivity(intent);
+                break;
         }
 
-        return valid;
     }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode==1000){
+//            if (resultCode== Activity.RESULT_OK){
+//                Uri imageUrl = data.getData();
+//                mProfilePic.setImageURI(imageUrl);
+//
+//                uplodaImage(imageUrl);
+//            }
+//        }
+//    }
+//
+//    private void uplodaImage(Uri imageUri) {
+//        final StorageReference fileRef = storageReference.child("profile.jpg");
+//        fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                    @Override
+//                    public void onSuccess(Uri uri) {
+//                        Picasso.get().load(uri).into(mProfilePic);
+//                    }
+//                });
+//            }
+//        });
+//    }
 }

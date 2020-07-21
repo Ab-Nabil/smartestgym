@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.R;
-import com.example.afinal.User;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
@@ -20,80 +19,106 @@ import java.util.Locale;
 
 public class CreateBdateActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private int mYear, mMonth, mDay;
     ImageView bDateBackRow;
     ImageView bDateForwardRow;
     EditText bDateValue;
-    User user;
-    final Calendar myCalendar = Calendar.getInstance();
-    final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            // TODO Auto-generated method stub
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, month);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            updateLabel();
-        }
-    };
+    public String mAge;
+    String gender,weight,height,username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate ( savedInstanceState );
-        setContentView ( R.layout.activity_create_bdate );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_create_bdate);
 
-        Gson gson = new Gson();
-        String userDO = getIntent().getStringExtra("userHO");
-        user = gson.fromJson(userDO, User.class);
+        bDateValue = (EditText) findViewById(R.id.bDateEditText);
+        bDateBackRow = (ImageView) findViewById(R.id.bDateBackRow);
+        bDateForwardRow = (ImageView) findViewById(R.id.bDateForwardRow);
 
-        bDateValue = findViewById(R.id.bDateEditText);
-        bDateBackRow = findViewById(R.id.bDateBackRow);
-        bDateForwardRow = findViewById(R.id.bDateForwardRow);
         bDateBackRow.setOnClickListener(this);
+        bDateValue.setOnClickListener(this);
         bDateForwardRow.setOnClickListener(this);
 
+        Bundle bundle=getIntent().getExtras();
 
-        bDateValue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                new DatePickerDialog(CreateBdateActivity.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
+        gender =bundle.getString("g");
+        weight =bundle.getString("w");
+        height = bundle.getString("h");
+        username = bundle.getString("username");
+
+    }
+    private void getAge(int year,int month,int day){
+        Calendar dob = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
+
+        dob.set(year, month, day);
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
+            age--;
+        }
+
+        Integer ageInt = new Integer(age);
+        mAge = ageInt.toString();
+
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bDateForwardRow: {
-                //get values from EditText fields
-                String bdatevalue = bDateValue.getText().toString();
-                if (bdatevalue.isEmpty()) {
-                    bDateValue.setHint("Empty Value");
+
+                if (bDateValue.getText().toString().isEmpty()) {
+                    bDateValue.setError("Enter Your Birth-Date");
+                    break;
                 } else {
-                    user.setUserBirthDate(bdatevalue);
-                    Intent intent = new Intent(CreateBdateActivity.this, CreateFitLevelActivity.class);
-                    Gson gson1 = new Gson();
-                    String userDO = gson1.toJson(user);
-                    intent.putExtra("userBDO", userDO);
+                    Intent intent;
+                    intent = new Intent(CreateBdateActivity.this, CreateFitLevelActivity.class);
+                    intent.putExtra("h",height);
+                    intent.putExtra("g",gender);
+                    intent.putExtra("w",weight);
+                    intent.putExtra("age",mAge);
+                    intent.putExtra("username",username);
                     startActivity(intent);
+                    break;
                 }
+            }
+            case R.id.bDateBackRow:
+                onBackPressed();
                 break;
-            }
 
-            case R.id.bDateBackRow:{
-                Intent intent=new Intent(CreateBdateActivity.this,CreateHeightActivity.class);
-                startActivity(intent);
-            }
-            break;
+
+            case R.id.bDateEditText:
+
+                if (v == bDateValue) {
+                    final Calendar c = Calendar.getInstance();
+                    mYear = c.get(Calendar.YEAR);
+                    mMonth = c.get(Calendar.MONTH);
+                    mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                            new DatePickerDialog.OnDateSetListener() {
+
+                                @Override
+                                public void onDateSet(DatePicker view, int year,
+                                                      int monthOfYear, int dayOfMonth) {
+
+                                    bDateValue.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                    getAge(year,monthOfYear,dayOfMonth);
+                                }
+                            }, mYear, mMonth, mDay);
+                    datePickerDialog.show();
+
+
+                }
+
+
         }
+
     }
 
-    private void updateLabel() {
-        String myFormat = "dd/MM/yy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        bDateValue.setText(sdf.format(myCalendar.getTime()));
-    }
 }
