@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.LoginActivity;
 import com.example.afinal.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,6 +24,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 
 public class MainProfileActivity extends AppCompatActivity implements View.OnClickListener{
@@ -44,11 +48,12 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
     String userID;
     FirebaseAuth fAuth;
     FirebaseFirestore firestore;
+    StorageReference storageReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_profile);
-
+        storageReference = FirebaseStorage.getInstance().getReference();
         fAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
 
@@ -85,6 +90,13 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
 
         checkcorrect = findViewById(R.id.checkcorrect);
         defuserimg = findViewById(R.id.defuserimg);
+        StorageReference profileRef = storageReference.child("users/"+fAuth.getCurrentUser().getUid()+"/profile.jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(defuserimg);
+            }
+        });
         gym = findViewById(R.id.gymworkout);
         home = findViewById(R.id.homeworkout);
         glss1 = findViewById(R.id.glss1);

@@ -30,6 +30,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
@@ -40,6 +41,7 @@ import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
     StorageReference storageReference;
+    Uri imageUrl;
     ProgressBar progressBar;
     FirebaseFirestore firestore;
     private FirebaseAuth mAuth;
@@ -58,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         mAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
-//        storageReference = FirebaseStorage.getInstance().getReference();
+        storageReference = FirebaseStorage.getInstance().getReference();
     }
 
     private void initiViews() {
@@ -92,6 +94,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
+                        //upload image
+                        uplodaImage(imageUrl);
                         progressBar.setVisibility(View.INVISIBLE);
                         finish();
                         Toast.makeText(RegisterActivity.this, "Register Successful", Toast.LENGTH_SHORT).show();
@@ -137,6 +141,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()){
             case R.id.register_buttonCreateAccount:
                 registerUser();
+
                 break;
 
             case R.id.register_profilePic:
@@ -158,26 +163,26 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==1000){
             if (resultCode== Activity.RESULT_OK){
-                Uri imageUrl = data.getData();
+                imageUrl = data.getData();
                 mProfilePic.setImageURI(imageUrl);
 
-                uplodaImage(imageUrl);
+
             }
         }
     }
-//
-//    private void uplodaImage(Uri imageUri) {
-//        final StorageReference fileRef = storageReference.child("profile.jpg");
-//        fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                    @Override
-//                    public void onSuccess(Uri uri) {
-//                        Picasso.get().load(uri).into(mProfilePic);
-//                    }
-//                });
-//            }
-//        });
-//    }
+
+    private void uplodaImage(Uri imageUri) {
+        final StorageReference fileRef = storageReference.child("users/"+mAuth.getCurrentUser().getUid()+"/profile.jpg");
+        fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.get().load(uri).into(mProfilePic);
+                    }
+                });
+            }
+        });
+    }
 }
