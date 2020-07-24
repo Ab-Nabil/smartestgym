@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Train.Inter_ContainerActivity"
+    android:background="#f6f6f6">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@drawable/train_background"
+        android:id="@+id/background_img"/>
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/white_arrow"
+        android:layout_margin="10dp"
+        android:id="@+id/inter_back_arrow"/>
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/profile_pic"
+        android:layout_marginTop="75dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/profile_pic_intermediate"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/intermediate"
+        android:layout_toRightOf="@+id/profile_pic_intermediate"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:id="@+id/inter_tv_container"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/background_img"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="PLANS"
+            android:textSize="17sp"
+            android:textColor="#7c7e82"
+            android:background="#e9e9e9"
+            android:layout_marginTop="30dp"
+            android:textStyle="bold"
+            android:paddingLeft="20dp"
+            android:paddingTop="7dp"
+            android:id="@+id/plans_container_tv"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/background_img"
+            android:orientation="vertical"
+            android:id="@+id/page_container_Empty"/>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

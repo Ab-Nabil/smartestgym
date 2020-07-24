@@ -48,7 +48,8 @@ public class EditProfSettingActivity extends AppCompatActivity {
 
                 }
             });
-        } else {
+        }
+        else {
             // No user is signed in
         }
 

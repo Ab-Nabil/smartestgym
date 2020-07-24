@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="250dp"
+    android:layout_height="450dp"
+    tools:context=".Admin.DialogeFragment"
+    android:background="@drawable/dialoge_shape"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search User Name"
+        android:textColor="#081740"
+        android:textSize="16dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/dialoge_shape"
+        android:layout_gravity="center"
+        android:layout_margin="20dp">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/et_dialoge"
+        android:layout_marginLeft="20dp"
+        android:textColor="#000"
+        />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/search_icon"
+            android:id="@+id/search_icon"
+            />
+    </RelativeLayout>
+
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:background="@drawable/btn_shape"
+    android:layout_margin="20dp"
+    android:text="SEARCH"
+    android:id="@+id/btn_search_dialgoe"
+    android:layout_gravity="bottom"
+
+    />
+</LinearLayout>

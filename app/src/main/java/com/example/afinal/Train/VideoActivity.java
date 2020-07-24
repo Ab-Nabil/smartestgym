@@ -63,6 +63,7 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
                 videoPath = "android.resource://" + getPackageName() +"/" + R.raw.day1tr3;
                 videoPath();
                 break;
+
         }
     }
 
@@ -75,17 +76,19 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void videoPath(){
+
         Uri uri = Uri.parse(videoPath);
         mVideoView.setVideoURI(uri);
         MediaController mediaController = new MediaController(this);
         mVideoView.setMediaController(mediaController);
         mediaController.setAnchorView(mVideoView);
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            
+
         }
     }
 }

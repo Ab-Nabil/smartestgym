@@ -40,11 +40,7 @@
         <activity android:name=".Train.VideoActivity" />
         <activity android:name=".Train.Inter_ContainerActivity" />
         <activity android:name=".Train.IntermediateActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Profiles.MainProfileActivity"></activity>
         <activity android:name=".CreateProfile.CreateActiveLevelActivity" />
@@ -58,7 +54,11 @@
         <activity android:name=".WelcomeActivity" />
         <activity android:name=".OnBoardActivity" />
         <activity android:name=".SplashActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
