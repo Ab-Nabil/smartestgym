@@ -22,16 +22,22 @@
         android:layout_height="match_parent"
         >
 
-        <ImageButton
+<!--        <ImageButton-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:id="@+id/register_profilePic"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:scaleType="centerInside"-->
+<!--            android:layout_height="120dp"-->
+<!--            android:src="@drawable/defuserimage"-->
+<!--            />-->
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="wrap_content"
             android:layout_centerInParent="true"
-            android:background="@android:color/transparent"
             android:id="@+id/register_profilePic"
-            android:layout_centerHorizontal="true"
-            android:scaleType="centerInside"
             android:layout_height="120dp"
-            android:src="@drawable/defuserimage"
-            />
+            android:src="@drawable/defuserimage"/>
         <TextView
             android:gravity="center"
             android:layout_alignParentBottom="true"

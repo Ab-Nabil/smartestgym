@@ -22,6 +22,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     FirebaseAuth mAuth;
     EditText mEmail,mPassword;
+    TextView mRegister;
     Button mLogin;
 
     ProgressBar progressBar;
@@ -34,7 +35,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mEmail = findViewById(R.id.loginEmail);
         mPassword = findViewById(R.id.loginPassword);
         mLogin = findViewById(R.id.buttonLogin);
-
+        mRegister = findViewById(R.id.signUpText);
+        mRegister.setOnClickListener(this);
         mLogin.setOnClickListener(this);
 
         progressBar = findViewById(R.id.logPrograssBar);
@@ -73,6 +75,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                //flag for clear so user can't go to login again after login
 //                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //                startActivity(intent);
+                break;
+            case R.id.signUpText:
+                Intent intent = new Intent(this,RegisterActivity.class);
+                startActivity(intent);
                 break;
         }
     }

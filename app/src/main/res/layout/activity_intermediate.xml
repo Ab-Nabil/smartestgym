@@ -19,7 +19,7 @@
         android:src="@drawable/white_arrow"
         android:layout_margin="10dp"
         android:id="@+id/inter_back_arrow"/>
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@drawable/profile_pic"

@@ -51,6 +51,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     ImageView mProfilePic;
     TextView mLogin;
     EditText mUserName,mEmail,mPassword,mConfPassword;
+    String usernamevalue;
+    String emailvalue;
+    String passwordvalue;
+    String confirmpasswordvalue;
+    boolean imageChanged;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,13 +67,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
+
+        mProfilePic.setTag("0");
+        imageChanged = false;
+
     }
 
     private void initiViews() {
         mProfilePic = findViewById(R.id.register_profilePic);
         mLogin = findViewById(R.id.register_login);
         mRegisterBtn = findViewById(R.id.register_buttonCreateAccount);
-
         mUserName = findViewById(R.id.register_userName);
         mEmail = findViewById(R.id.register_email);
         mPassword = findViewById(R.id. register_password);
@@ -81,13 +90,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void registerUser(){
-        final String usernamevalue = mUserName.getText().toString();
-        final String emailvalue = mEmail.getText().toString();
-        String passwordvalue = mPassword.getText().toString();
-        String confirmpasswordvalue = mConfPassword.getText().toString();
+        usernamevalue = mUserName.getText().toString();
+        String emailvalue = mEmail.getText().toString();
+         passwordvalue = mPassword.getText().toString();
+         confirmpasswordvalue = mConfPassword.getText().toString();
 
         //firebase email&password
-        if (passwordvalue.length()>=6 && Patterns.EMAIL_ADDRESS.matcher(emailvalue).matches()) {
+//        if (passwordvalue.length()>=6 && Patterns.EMAIL_ADDRESS.matcher(emailvalue).matches()) {
+        if (Validate()) {
             progressBar.setVisibility(View.VISIBLE);
             mAuth.createUserWithEmailAndPassword(emailvalue, passwordvalue)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -106,33 +116,26 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     }
                     else{
                         Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.INVISIBLE);
                     }
                 }
             });
+        }
+//        else {
+//            Toast.makeText(this, "email not valid or Password <6 ", Toast.LENGTH_SHORT).show();
+//
+//        }
+        else if (!Validate()) {
+            Toast toast = Toast.makeText(RegisterActivity.this, "UnSuccessfully SignUp", Toast.LENGTH_SHORT);
         }
         else {
-            Toast.makeText(this, "email not valid or Password <6 ", Toast.LENGTH_SHORT).show();
+            Toast toast = Toast.makeText(RegisterActivity.this, "UnSuccessfully SignUp", Toast.LENGTH_SHORT);
         }
-        if (usernamevalue.isEmpty()){
-            mUserName.setError("UserName required");
-            mUserName.requestFocus();
-            return;
-        }
-        FirebaseUser user = mAuth.getCurrentUser();
-
-        if (user!=null){
-            UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(usernamevalue).build()
-                    ;
-            user.updateProfile(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()){
-
-                    }
-                }
-            });
-        }
+//        if (usernamevalue.isEmpty()){
+//            mUserName.setError("UserName required");
+//            mUserName.requestFocus();
+//            return;
+//        }
 
     }
 
@@ -165,12 +168,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             if (resultCode== Activity.RESULT_OK){
                 imageUrl = data.getData();
                 mProfilePic.setImageURI(imageUrl);
-
+                imageChanged = true;
 
             }
         }
     }
-
     private void uplodaImage(Uri imageUri) {
         final StorageReference fileRef = storageReference.child("users/"+mAuth.getCurrentUser().getUid()+"/profile.jpg");
         fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -184,5 +186,67 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 });
             }
         });
+    }
+    private boolean Validate() {
+        boolean valid;
+        usernamevalue = mUserName.getText().toString();
+        emailvalue = mEmail.getText().toString();
+        passwordvalue = mPassword.getText().toString();
+        confirmpasswordvalue = mConfPassword.getText().toString();
+
+        if (usernamevalue.isEmpty() || emailvalue.isEmpty() || passwordvalue.isEmpty() || confirmpasswordvalue.isEmpty()) {
+            valid = false;
+            if (usernamevalue.isEmpty())
+                mUserName.setError("Empty value");
+            if (emailvalue.isEmpty())
+                mEmail.setError("Empty value");
+            if (passwordvalue.isEmpty())
+                mPassword.setError("Empty value");
+            if (confirmpasswordvalue.isEmpty())
+                mConfPassword.setError("Empty value");
+            return valid;
+        } else {
+            if (usernamevalue.length() <= 4) {
+                valid = false;
+                mUserName.setError("short username < 5");
+            } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailvalue).matches()) {
+                valid = false;
+                mEmail.setError("Please enter valid email!");
+            } else if (!passwordvalue.equals(confirmpasswordvalue)) {
+                mConfPassword.setError("Passwords are not matching!");
+                mConfPassword.setFocusable(true);
+                valid = false;
+                mPassword.setError("Passwords are not matching!");
+            } else if (passwordvalue.length() <= 7) {
+                valid = false;
+                mPassword.setError("short password < 8");
+            }
+            else {
+                if (!passwordvalue.matches("(?=.*[0-9]).*")) {
+                    valid = false;
+                    mPassword.setError("password should contain digits");
+                }
+                else if (!passwordvalue.matches("(?=.*[a-z]).*")) {
+                    valid = false;
+                    mPassword.setError("password should contain lower case letter");
+                }
+                else if (!passwordvalue.matches("(?=.*[A-Z]).*")) {
+                    valid = false;
+                    mPassword.setError("password should contain upper case letter");
+                }
+                else if (!passwordvalue.matches("(?=.*[~!@#$%^&*()_/]).*")) {
+                    valid = false;
+                    mPassword.setError("password should contain special character letter");
+                }
+                else if(!imageChanged){
+                    valid = false;
+                    Toast.makeText(this, "Please Select Profile Picture", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    valid = true;
+                }
+            }
+        }
+        return valid;
     }
 }

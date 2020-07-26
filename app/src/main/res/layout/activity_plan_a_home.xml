@@ -18,19 +18,19 @@
         android:layout_height="25dp"
         android:src="@drawable/white_arrow"
         android:layout_margin="10dp"
-        android:id="@+id/inter_back_arrow"/>
-    <ImageView
+        android:id="@+id/inter_back_arrow_plana"/>
+    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@drawable/profile_pic"
         android:layout_marginTop="75dp"
         android:layout_marginLeft="10dp"
-        android:id="@+id/profile_pic_intermediate"/>
+        android:id="@+id/profile_pic_intermediate_plana"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="INTERMEDIATE - PLAN A"
-        android:layout_toRightOf="@+id/profile_pic_intermediate"
+        android:layout_toRightOf="@+id/profile_pic_intermediate_plana"
         android:layout_marginTop="100dp"
         android:layout_marginLeft="10dp"
         android:textSize="20dp"

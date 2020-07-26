@@ -67,7 +67,7 @@
             android:layout_marginTop="10dp">
 
             <ImageView
-                android:id="@+id/defuserimg"
+                android:id="@+id/defuserimgprofile"
                 android:layout_width="105dp"
                 android:layout_height="105dp"
                 android:layout_alignParentStart="true"
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/defuserimg"
+                android:layout_toEndOf="@+id/defuserimgprofile"
                 android:gravity="start"
                 android:text="user name"
                 android:textColor="@color/colorWhite"

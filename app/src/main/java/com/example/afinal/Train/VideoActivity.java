@@ -6,6 +6,8 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -28,6 +30,7 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
     int position;
     String result;
     String videoPath;
+    Button back,complete,pause;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +66,34 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
                 videoPath = "android.resource://" + getPackageName() +"/" + R.raw.day1tr3;
                 videoPath();
                 break;
-
+            case "Machine fly":
+                videoPath = "android.resource://" + getPackageName() +"/" + R.raw.day1tr4;
+                videoPath();
+                break;
+            case "Dips":
+                videoPath = "android.resource://" + getPackageName() +"/" + R.raw.day1tr5;
+                videoPath();
+                break;
+            case "Wide-Grip Barbell Curl":
+                videoPath = "android.resource://" + getPackageName() +"/" + R.raw.day1tr6;
+                videoPath();
+                break;
+            case "Dumbbell Hammer Preacher Curls":
+                videoPath = "android.resource://" + getPackageName() +"/" + R.raw.day1tr7;
+                videoPath();
+                break;
+            case "Close-Grip EZ-Bar Curl":
+                videoPath = "android.resource://" + getPackageName() +"/" + R.raw.day1tr8;
+                videoPath();
+                break;
+            case "Crunches":
+                videoPath = "android.resource://" + getPackageName() +"/" + R.raw.day1tr9;
+                videoPath();
+                break;
+            case "Russian Twists":
+                videoPath = "android.resource://" + getPackageName() +"/" + R.raw.day1tr10;
+                videoPath();
+                break;
         }
     }
 
@@ -72,7 +102,13 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
         f_tv = findViewById(R.id.video_f_tv);
         s_tv = findViewById(R.id.video_s_tv);
         mVideoView = findViewById(R.id.video_view);
+        back = findViewById(R.id.video_button_back);
+        complete = findViewById(R.id.video_button_complete);
+        complete.setOnClickListener(this);
+        back.setOnClickListener(this);
 
+        ImageView backarrow = findViewById(R.id.video_back_arrow);
+        backarrow.setOnClickListener(this);
     }
 
     private void videoPath(){
@@ -88,7 +124,16 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-
+            case R.id.video_button_back:
+                onBackPressed();
+                break;
+            case R.id.video_button_complete:
+                onBackPressed();
+                break;
+            case R.id.video_back_arrow:
+                onBackPressed();
+                break;
         }
+
     }
 }

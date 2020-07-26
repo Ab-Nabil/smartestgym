@@ -4,14 +4,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.afinal.R;
 import com.example.afinal.WelcomeActivity;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
@@ -20,9 +21,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 public class ProfileMenuActivity extends AppCompatActivity {
-    ImageView profilebackrow;
+    ImageView profilebackrow,profileimg;
     TextView agetv,weighttv,heighttv,emailtv,usernamev;
 
     FirebaseUser user;
@@ -30,7 +34,7 @@ public class ProfileMenuActivity extends AppCompatActivity {
     FirebaseAuth fAuth;
     FirebaseFirestore firestore;
     FirebaseDatabase firebaseDatabase;
-
+    StorageReference storageReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +42,7 @@ public class ProfileMenuActivity extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-
+        storageReference = FirebaseStorage.getInstance().getReference();
         userID = fAuth.getCurrentUser().getUid();
 
         agetv = findViewById(R.id.agevalue);
@@ -56,6 +60,14 @@ public class ProfileMenuActivity extends AppCompatActivity {
             }
         });
 
+        profileimg= findViewById(R.id.defuserimgprofile);
+        StorageReference profileRef = storageReference.child("users/"+fAuth.getCurrentUser().getUid()+"/profile.jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(profileimg);
+            }
+        });
         DocumentReference documentReference = firestore.collection("users").document(userID);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
@@ -64,7 +76,6 @@ public class ProfileMenuActivity extends AppCompatActivity {
                 heighttv.setText(documentSnapshot.getString("height")+" CM");
                 weighttv.setText(documentSnapshot.getString("weight")+" KG");
                 usernamev.setText(documentSnapshot.getString("username"));
-
             }
         });
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="250dp"
-    android:layout_height="450dp"
+    android:layout_width="180dp"
+    android:layout_height="200dp"
+    android:minWidth="800dp"
+    android:minHeight="250dp"
     tools:context=".Admin.DialogeFragment"
     android:background="@drawable/dialoge_shape"
     android:orientation="vertical"
@@ -14,28 +16,36 @@
         android:text="Search User Name"
         android:textColor="#081740"
         android:textSize="16dp"
+        android:layout_alignParentTop="true"
         android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
         android:layout_margin="10dp"/>
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
         android:background="@drawable/dialoge_shape"
-        android:layout_gravity="center"
+        android:layout_centerInParent="true"
         android:layout_margin="20dp">
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/ic_search"-->
+<!--            android:id="@+id/search_icon"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            />-->
     <EditText
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/et_dialoge"
-        android:layout_marginLeft="20dp"
+
         android:textColor="#000"
+        android:drawableLeft="@drawable/ic_search"
+
         />
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/search_icon"
-            android:id="@+id/search_icon"
-            />
+
+
     </RelativeLayout>
 
 <Button
@@ -45,7 +55,7 @@
     android:layout_margin="20dp"
     android:text="SEARCH"
     android:id="@+id/btn_search_dialgoe"
-    android:layout_gravity="bottom"
+    android:layout_alignParentBottom="true"
 
     />
 </LinearLayout>

@@ -13,8 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.afinal.LoginActivity;
 import com.example.afinal.R;
+import com.example.afinal.Train.IntermediateActivity;
+import com.example.afinal.WelcomeActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,10 +32,10 @@ import com.squareup.picasso.Picasso;
 
 public class MainProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
-    
+    int fit;
     Button menuicon;
     NavigationView navigationn;
-    ImageView gym,home,logobackrow,defuserimg,checkcorrect;
+    ImageView gym,home,logobackrow,defuserimg,menuimg,checkcorrect;
     TextView usernamev,cupcounter,mStartWeight,menuusernamev;
     int counter=0;
     ImageView glss1,glss2,glss3,glss4,glss5,glss6,glss7,glss8;
@@ -59,23 +60,20 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
 
         userID = fAuth.getCurrentUser().getUid();
 
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        usernamev.setText(user.getDisplayName());
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            String userEmail = user.getEmail();
-        } else {
-            // No user is signed in
-        }
-
-//        loadUserInfo();
-
         DocumentReference documentReference = firestore.collection("users").document(userID);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+
                 mStartWeight.setText(documentSnapshot.getString("weight"));
+
+                //delete user if have no weight
+                if (documentSnapshot.getString("weight") == null){
+                    fAuth.getCurrentUser().delete();
+                    Intent intent = new Intent(MainProfileActivity.this, WelcomeActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(MainProfileActivity.this, "Your Account has been deleted please register again", Toast.LENGTH_LONG).show();
+                }
                 menuusernamev.setText(documentSnapshot.getString("username"));
                 usernamev.setText(documentSnapshot.getString("username"));
             }
@@ -89,12 +87,14 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
         mStartWeight = findViewById(R.id.startweightvalue);
 
         checkcorrect = findViewById(R.id.checkcorrect);
-        defuserimg = findViewById(R.id.defuserimg);
+        defuserimg = findViewById(R.id.defuserimgprofile);
+        menuimg = findViewById(R.id.menudefuserimg);
         StorageReference profileRef = storageReference.child("users/"+fAuth.getCurrentUser().getUid()+"/profile.jpg");
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Picasso.get().load(uri).into(defuserimg);
+                Picasso.get().load(uri).into(menuimg);
             }
         });
         gym = findViewById(R.id.gymworkout);
@@ -148,7 +148,6 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
             }
         });
     }
-
 //    @Override
 //    protected void onStart() {
 //        super.onStart();
@@ -165,7 +164,6 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
 ////        String displayName = user.getDisplayName();
 ////        usernamev.setText(displayName);
 //    }
-
     @Override
     public void onBackPressed() {
         if (navi_open) {
@@ -190,19 +188,19 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
             }
             return;
         }
-
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.gymworkout: {
-                Intent intent=new Intent(MainProfileActivity.this,HomeWorkoutActivity.class);
-                startActivity(intent);
+//                Intent intent=new Intent(MainProfileActivity.this,gymWorkoutActivity.class);
+//                startActivity(intent);
+                checkfit();
                 break;
             }
             case R.id.homeworkout:{
-                Intent intent=new Intent(MainProfileActivity.this,gymWorkoutActivity.class);
+                Intent intent=new Intent(MainProfileActivity.this,HomeWorkoutActivity.class);
                 startActivity(intent);
                 break;
             }
@@ -337,6 +335,22 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
             checkcorrect.setVisibility(View.INVISIBLE);
         }
 
+    }
+    // method to check fit lvl for user
+    private void checkfit() {
+
+        DocumentReference documentReference = firestore.collection("users").document(userID);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+             fit = Integer.parseInt(documentSnapshot.getString("fit"));
+
+            }
+        });
+        if (fit == 2){
+            Intent intent = new Intent(this, IntermediateActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void openProfileMenu(View view) {
