@@ -36,6 +36,9 @@ public class DialogeFragment extends AppCompatDialogFragment implements View.OnC
     EditText editText;
     Button button;
     FirebaseFirestore firestore;
+    String getname;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference userRef = db.collection("users");
     public DialogeFragment() {
         // Required empty public constructor
     }
@@ -74,7 +77,8 @@ public class DialogeFragment extends AppCompatDialogFragment implements View.OnC
         }else {
             editText.setError("Empty Name");
         }
+
+
+
     }
-
-
 }

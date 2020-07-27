@@ -263,7 +263,7 @@
                 android:layout_alignParentTop="true"
                 android:id="@+id/defuserimgprofile"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/defuserimage"
+
                 />
             <TextView
                 android:paddingBottom="15dp"
@@ -274,7 +274,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:text="user name"
+
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
                 android:textStyle="bold" />

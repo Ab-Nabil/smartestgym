@@ -299,64 +299,13 @@
             android:layout_height="wrap_content"
             android:src="@drawable/hrline"
             />
-        <RelativeLayout
-            android:layout_marginEnd="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="10dp"
-            android:id="@+id/goalweightinfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/hr3"
-            >
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
 
-                <ImageView
-                    android:layout_marginEnd="10dp"
-                    android:scaleType="fitXY"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/profilelogogw"
-                    />
-                <TextView
-                    android:textColor="@color/colorBlack"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Goal Weight"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-            <TextView
-                android:layout_marginEnd="30dp"
-                android:layout_centerVertical="true"
-                android:textColor="@color/colorBlack"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text="00 Kg"
-                />
-            <ImageView
-                android:id="@+id/gweditsetting"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:scaleType="fitXY"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/settinglogoep"
-                />
-        </RelativeLayout>
         <ImageView
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             android:id="@+id/hr4"
             android:layout_marginTop="5dp"
-            android:layout_below="@+id/goalweightinfo"
+            android:layout_below="@+id/startweightinfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/hrline"
@@ -420,56 +369,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/hrline"
             />
-        <RelativeLayout
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/energyinfo"
-            android:layout_below="@+id/hr5"
-            >
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
 
-                <ImageView
-                    android:scaleType="fitXY"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/profilelogoenergy"
-                    />
-                <TextView
-                    android:textColor="@color/colorBlack"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Energy"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-            <TextView
-                android:layout_marginEnd="30dp"
-                android:layout_centerVertical="true"
-                android:textColor="@color/colorBlack"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text="0000 Kcal"
-                />
-            <ImageView
-                android:id="@+id/energyeditsetting"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:scaleType="fitXY"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/settinglogoep"
-                />
-        </RelativeLayout>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"

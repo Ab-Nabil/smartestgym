@@ -27,7 +27,7 @@ import com.squareup.picasso.Picasso;
 
 public class ProfileMenuActivity extends AppCompatActivity {
     ImageView profilebackrow,profileimg;
-    TextView agetv,weighttv,heighttv,emailtv,usernamev;
+    TextView agetv,weighttv,heighttv,emailtv,usernamev,goalweighttv;
 
     FirebaseUser user;
     String userID;
@@ -50,6 +50,7 @@ public class ProfileMenuActivity extends AppCompatActivity {
         usernamev = findViewById(R.id.usernamev);
         heighttv = findViewById(R.id.heightProfile);
         weighttv = findViewById(R.id.startingWeight);
+        goalweighttv = findViewById(R.id.goalWeightmenu);
 
         profilebackrow=(ImageView)findViewById(R.id.profileBackRow);
         profilebackrow.setOnClickListener(new View.OnClickListener() {
@@ -76,8 +77,24 @@ public class ProfileMenuActivity extends AppCompatActivity {
                 heighttv.setText(documentSnapshot.getString("height")+" CM");
                 weighttv.setText(documentSnapshot.getString("weight")+" KG");
                 usernamev.setText(documentSnapshot.getString("username"));
+                String g = documentSnapshot.getString("gender");
+                String height = documentSnapshot.getString("height");
+                float h = Float.parseFloat(height);
+                         /*The Broca equation
+                Women: IBW [kg] = (height[cm] - 100) - ((height[cm] - 100) × 15%)
+                Men: IBW [kg] = (height[cm] - 100) - ((height[cm] - 100) × 10%)
+                */
+                if (g.startsWith("m")) {
+                    double IBW = (h - 100) - ((h - 100) * 10 / 100);
+                    //Math.ceil(IBW);
+                    goalweighttv.setText(""+(int)(IBW)+" KG");
+                } else if (g.startsWith("f")){
+                    double IBW = ((int)h - 100) - ((h - 100) * 15 / 100);
+                    goalweighttv.setText(""+(int)(IBW)+" KG");
+                }
             }
         });
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             String userEmail = user.getEmail();

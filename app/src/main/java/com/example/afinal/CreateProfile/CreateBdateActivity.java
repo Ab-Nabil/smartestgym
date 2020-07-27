@@ -91,7 +91,6 @@ public class CreateBdateActivity extends AppCompatActivity implements View.OnCli
 
 
             case R.id.bDateEditText:
-
                 if (v == bDateValue) {
                     final Calendar c = Calendar.getInstance();
                     mYear = c.get(Calendar.YEAR);
@@ -112,13 +111,8 @@ public class CreateBdateActivity extends AppCompatActivity implements View.OnCli
                             }, mYear, mMonth, mDay);
                     datePickerDialog.show();
 
-
                 }
-
-
+                break;
         }
-
     }
-
-
 }

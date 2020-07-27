@@ -29,14 +29,19 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class MainProfileActivity extends AppCompatActivity implements View.OnClickListener{
-
+    Date membershipDate;
     int fit;
     Button menuicon;
     NavigationView navigationn;
     ImageView gym,home,logobackrow,defuserimg,menuimg,checkcorrect;
-    TextView usernamev,cupcounter,mStartWeight,menuusernamev;
+    TextView usernamev,cupcounter,mStartWeight,mGoalWeight,menuusernamev;
     int counter=0;
     ImageView glss1,glss2,glss3,glss4,glss5,glss6,glss7,glss8;
     boolean a0=true;boolean a1=true;boolean a2=true;boolean a3=true;boolean a4=true;boolean a5=true;boolean a6=true;boolean a7=true;
@@ -74,6 +79,22 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
                     startActivity(intent);
                     Toast.makeText(MainProfileActivity.this, "Your Account has been deleted please register again", Toast.LENGTH_LONG).show();
                 }
+                String g = documentSnapshot.getString("gender");
+                String height = documentSnapshot.getString("height");
+                float h = Float.parseFloat(height);
+
+                /*The Broca equation
+                Women: IBW [kg] = (height[cm] - 100) - ((height[cm] - 100) × 15%)
+                Men: IBW [kg] = (height[cm] - 100) - ((height[cm] - 100) × 10%)
+                */
+                if (g.startsWith("m")) {
+                    double IBW = (h - 100) - ((h - 100) * 10 / 100);
+                    //Math.ceil(IBW);
+                    mGoalWeight.setText(""+(int)(IBW));
+                } else if (g.startsWith("f")){
+                    double IBW = ((int)h - 100) - ((h - 100) * 15 / 100);
+                    mGoalWeight.setText(""+(int)(IBW));
+                }
                 menuusernamev.setText(documentSnapshot.getString("username"));
                 usernamev.setText(documentSnapshot.getString("username"));
             }
@@ -85,7 +106,7 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
         usernamev = findViewById(R.id.usernamev);
 
         mStartWeight = findViewById(R.id.startweightvalue);
-
+        mGoalWeight = findViewById(R.id.goalweightvalue);
         checkcorrect = findViewById(R.id.checkcorrect);
         defuserimg = findViewById(R.id.defuserimgprofile);
         menuimg = findViewById(R.id.menudefuserimg);
@@ -148,22 +169,7 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
             }
         });
     }
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        if (fAuth.getCurrentUser() ==null){
-//            finish();
-//            startActivity(new Intent(this, LoginActivity.class));
-//        }
-//    }
-//
-//    private void loadUserInfo() {
-//        user  = fAuth.getCurrentUser();
-//
-////        String photoUrl = user.getPhotoUrl().toString();
-////        String displayName = user.getDisplayName();
-////        usernamev.setText(displayName);
-//    }
+
     @Override
     public void onBackPressed() {
         if (navi_open) {
@@ -334,7 +340,6 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
         else {
             checkcorrect.setVisibility(View.INVISIBLE);
         }
-
     }
     // method to check fit lvl for user
     private void checkfit() {
@@ -343,14 +348,30 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-             fit = Integer.parseInt(documentSnapshot.getString("fit"));
+                fit = Integer.parseInt(documentSnapshot.getString("fit"));
+                Date todayDate = new Date();
+                if (documentSnapshot.getString("membership") == ""){
+                    Toast.makeText(MainProfileActivity.this, "please upgrade your membership", Toast.LENGTH_SHORT).show();
 
+                }
+                else {
+                    try {
+                        membershipDate = new SimpleDateFormat("dd-MM-yyyy").parse(documentSnapshot.getString("membership"));
+                    } catch (ParseException ex) {
+                        ex.printStackTrace();
+                    }
+                    if (membershipDate.after(todayDate)) {
+                        if (fit == 2) {
+                            Intent intent = new Intent(MainProfileActivity.this, IntermediateActivity.class);
+                            startActivity(intent);
+                        }
+                    } else if (membershipDate.before(todayDate)) {
+                        Toast.makeText(MainProfileActivity.this, "please upgrade your membership", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
-        if (fit == 2){
-            Intent intent = new Intent(this, IntermediateActivity.class);
-            startActivity(intent);
-        }
+
     }
 
     public void openProfileMenu(View view) {
@@ -372,4 +393,5 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
         Intent intent=new Intent(MainProfileActivity.this,MealMenuActivity.class);
         startActivity(intent);
     }
+
 }

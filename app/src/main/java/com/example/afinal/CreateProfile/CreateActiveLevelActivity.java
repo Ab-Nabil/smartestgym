@@ -92,6 +92,7 @@ public class CreateActiveLevelActivity extends AppCompatActivity implements View
                     DocumentReference documentReference = firestore.collection("users").document(userID);
 
                     user.put("active",active);
+                    user.put("membership","");
                     documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {

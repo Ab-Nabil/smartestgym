@@ -43,13 +43,13 @@ public class MainAdminActivity extends AppCompatActivity implements View.OnClick
     private void intitView() {
 
         mAdd = findViewById(R.id.add_membership_click);
-        mUpadte = findViewById(R.id.update_membership_click);
+//        mUpadte = findViewById(R.id.update_membership_click);
         mDelete = findViewById(R.id.delete_membership_click);
 
         dialogeFragment = new DialogeFragment();
 
         mAdd.setOnClickListener(this);
-        mUpadte.setOnClickListener(this);
+//        mUpadte.setOnClickListener(this);
         mDelete.setOnClickListener(this);
     }
 
@@ -57,28 +57,12 @@ public class MainAdminActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.add_membership_click:
-//                dialogeFragment.show(getSupportFragmentManager(),"add");
-                FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
-                final CollectionReference complaintsRef = rootRef.collection("users");
-//                String name = editText.getText().toString();
-                complaintsRef.whereEqualTo("username","mort").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Map<Object, String> map = new HashMap<>();
-                                map.put("username", "abdelrahman");
-
-                                complaintsRef.document(document.getId()).set(map, SetOptions.merge());
-                            }
-                        }
-                    }
-                });
+                dialogeFragment.show(getSupportFragmentManager(),"add");
                 break;
 
-            case R.id.update_membership_click:
-                dialogeFragment.show(getSupportFragmentManager(),"update");
-                break;
+//            case R.id.update_membership_click:
+//                dialogeFragment.show(getSupportFragmentManager(),"update");
+//                break;
 
             case R.id.delete_membership_click:
                 dialogeFragment.show(getSupportFragmentManager(),"delete");
