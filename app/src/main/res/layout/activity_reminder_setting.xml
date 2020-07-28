@@ -75,7 +75,7 @@
                 android:layout_centerHorizontal="true"
                 android:background="@android:color/transparent"
                 android:scaleType="centerInside"
-                android:src="@drawable/defuserimage" />
+                 />
 
             <TextView
                 android:layout_centerVertical="true"

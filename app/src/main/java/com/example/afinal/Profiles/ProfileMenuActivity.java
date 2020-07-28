@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.afinal.R;
@@ -28,7 +29,7 @@ import com.squareup.picasso.Picasso;
 public class ProfileMenuActivity extends AppCompatActivity {
     ImageView profilebackrow,profileimg;
     TextView agetv,weighttv,heighttv,emailtv,usernamev,goalweighttv;
-
+    LinearLayout logout,changepass;
     FirebaseUser user;
     String userID;
     FirebaseAuth fAuth;
@@ -60,6 +61,25 @@ public class ProfileMenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //logout
+        logout = findViewById(R.id.logoutinfo);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                Intent intent=new Intent(ProfileMenuActivity.this, WelcomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        changepass = findViewById(R.id.changepasswordlinear);
+        changepass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent intent = new Intent(ProfileMenuActivity.this,ChangePasswordActivity.class);
+               startActivity(intent);
+            }
+        });
 
         profileimg= findViewById(R.id.defuserimgprofile);
         StorageReference profileRef = storageReference.child("users/"+fAuth.getCurrentUser().getUid()+"/profile.jpg");
@@ -80,7 +100,7 @@ public class ProfileMenuActivity extends AppCompatActivity {
                 String g = documentSnapshot.getString("gender");
                 String height = documentSnapshot.getString("height");
                 float h = Float.parseFloat(height);
-                         /*The Broca equation
+                /*The Broca equation
                 Women: IBW [kg] = (height[cm] - 100) - ((height[cm] - 100) × 15%)
                 Men: IBW [kg] = (height[cm] - 100) - ((height[cm] - 100) × 10%)
                 */
@@ -102,11 +122,5 @@ public class ProfileMenuActivity extends AppCompatActivity {
         } else {
             // No user is signed in
         }
-    }
-
-    public void activeLogout(View view) {
-        FirebaseAuth.getInstance().signOut();
-        Intent intent=new Intent(ProfileMenuActivity.this, WelcomeActivity.class);
-        startActivity(intent);
     }
 }

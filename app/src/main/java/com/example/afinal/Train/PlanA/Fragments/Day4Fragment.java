@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Day4Fragment extends Fragment implements OnTrClick{
+public class Day4Fragment extends Fragment {
 View view;
     TextView mplanTV;
     RecyclerView recyclerView;
@@ -96,8 +96,8 @@ View view;
     }
 
 
-    @Override
-    public void onItemClick(int position) {
-
-    }
+//    @Override
+//    public void onItemClick(int position) {
+//
+//    }
 }

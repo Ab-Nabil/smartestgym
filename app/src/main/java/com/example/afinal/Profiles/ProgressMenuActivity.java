@@ -4,11 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.afinal.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,19 +31,34 @@ public class ProgressMenuActivity extends AppCompatActivity {
     LineChartView lineChartView;
     String[] axisData = {"week0","week1", "week2", "week3", "week4","5"};
     int[] yAxisData = {58, 59, 60, 61, 62,63};
-    ImageView progressBackRow;
+    ImageView progressBackRow,mprofilepic;
+    TextView usernamev;
+    StorageReference storageReference;
+    FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress_menu);
+        storageReference = FirebaseStorage.getInstance().getReference();
+        fAuth = FirebaseAuth.getInstance();
+        mprofilepic = findViewById(R.id.defuserimgprofile);
+        StorageReference profileRef = storageReference.child("users/"+fAuth.getCurrentUser().getUid()+"/profile.jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(mprofilepic);
 
+            }
+        });
+        usernamev=findViewById(R.id.usernamevprog);
+        Intent intent = getIntent();
+        usernamev.setText(intent.getStringExtra("username"));
         progressBackRow=(ImageView)findViewById(R.id.progressBackRow);
         progressBackRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(ProgressMenuActivity.this,MainProfileActivity.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
 

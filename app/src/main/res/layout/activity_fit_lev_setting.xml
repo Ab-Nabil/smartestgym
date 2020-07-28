@@ -76,13 +76,13 @@
                 android:layout_centerHorizontal="true"
                 android:background="@android:color/transparent"
                 android:scaleType="centerInside"
-                android:src="@drawable/defuserimage" />
+                 />
 
             <TextView
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/defuserimgprofile"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/usernamev"
+                android:id="@+id/usernamevfit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
@@ -134,6 +134,7 @@
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/fitLevelbeginner"
                 >
 
                 <ImageView
@@ -173,8 +174,9 @@
             >
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/fitLevelintermediate"
                 >
 
                 <ImageView
@@ -214,8 +216,9 @@
             >
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/fitLeveladvanced"
                 >
 
                 <ImageView

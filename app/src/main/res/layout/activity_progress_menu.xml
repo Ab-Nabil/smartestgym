@@ -78,13 +78,13 @@
                 android:layout_centerHorizontal="true"
                 android:background="@android:color/transparent"
                 android:scaleType="centerInside"
-                android:src="@drawable/defuserimage" />
+                 />
 
             <TextView
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/defuserimgprofile"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/usernamev"
+                android:id="@+id/usernamevprog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"

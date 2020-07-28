@@ -75,7 +75,7 @@
                 android:layout_width="105dp"
                 android:layout_height="105dp"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/defuserimage" />
+                 />
 
             <TextView
                 android:layout_centerVertical="true"
@@ -467,6 +467,7 @@
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/changepasswordlinear"
                 >
 
                 <ImageView
@@ -507,7 +508,6 @@
             android:layout_below="@+id/hr6"
             >
             <LinearLayout
-                android:onClick="activeLogout"
                 android:id="@+id/logoutinfo"
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"

@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Day2Fragment extends Fragment implements OnTrClick{
+public class Day2Fragment extends Fragment {
 
     View view;
     TextView mplanTV;
@@ -79,11 +79,11 @@ public class Day2Fragment extends Fragment implements OnTrClick{
                 "tool : bench | sets : 4 | reps: 10", R.drawable.day2_5);
         trainModels.add(trainModel4);
 
-        TrainModel trainModel5 = new TrainModel("Cable Reverse-Grip Pushdown\n" ,
+        TrainModel trainModel5 = new TrainModel("Cable Reverse-Grip Pushdown" ,
                 "tool : Cable | sets : 4 | reps: 10", R.drawable.day2_6);
         trainModels.add(trainModel5);
 
-        TrainModel trainModel6 = new TrainModel("rope pushdown\n" ,
+        TrainModel trainModel6 = new TrainModel("rope pushdown" ,
                 "tool : Cable | sets : 4 | reps: 10", R.drawable.day2_7);
         trainModels.add(trainModel6);
 
@@ -91,7 +91,7 @@ public class Day2Fragment extends Fragment implements OnTrClick{
                 "Tool : Barbell | sets : 4 | reps: 10", R.drawable.day2_4);
         trainModels.add(trainModel7);
 
-        TrainModel trainModel8 = new TrainModel("bent-over two-arm kickback\n" ,
+        TrainModel trainModel8 = new TrainModel("bent-over two-arm kickback" ,
                 "tool : dumbbell | sets : 4 | reps: 10", R.drawable.day2_8);
         trainModels.add(trainModel8);
 
@@ -103,9 +103,9 @@ public class Day2Fragment extends Fragment implements OnTrClick{
     }
 
 
-    @Override
-    public void onItemClick(int position) {
-
-    }
+//    @Override
+//    public void onItemClick(int position) {
+//
+//    }
 }
 

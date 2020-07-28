@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.afinal.R;
 
 public class SettingMenuActivity extends AppCompatActivity {
     ImageView settingbackrow;
+    TextView usernamev;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,10 @@ public class SettingMenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        usernamev=findViewById(R.id.usernamevSett);
+        Intent intent = getIntent();
+        usernamev.setText(intent.getStringExtra("username"));
     }
 
     public void openFitLev(View view) {

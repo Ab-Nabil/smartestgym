@@ -40,35 +40,45 @@
         app:layout_constraintTop_toBottomOf="@+id/video_back_arrow"
         android:layout_margin="20dp"
         />
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintVertical_bias="0.2"
-    android:id="@+id/video_viewf"
-    android:layout_margin="13dp"
-    >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.2"
+        android:id="@+id/video_viewf"
+        android:layout_margin="13dp"
+        >
         <VideoView
             android:layout_width="match_parent"
             android:layout_height="170dp"
             android:id="@+id/video_view"
-            android:layout_margin="13dp"
 
             />
-</FrameLayout>
+    </FrameLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tool : Rope/Free \n Sets : 3 x Reps: 15 "
+        android:text="Tool : Rope/Free \n Sets : 3 x Reps: 10 "
         android:textColor="#000"
         android:textSize="15sp"
         android:layout_margin="13dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/video_viewf"
         android:id="@+id/video_s_tv"
+        />
+    <Chronometer
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_margin="13dp"
+        android:id="@+id/chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/video_viewf"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -142,6 +152,7 @@
             />
 
         <TextView
+            android:id="@+id/t1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="10"
@@ -157,6 +168,7 @@
             android:layout_weight="1"
             android:layout_gravity="center">
             <CheckBox
+                android:visibility="invisible"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center_horizontal"
@@ -181,51 +193,51 @@
 
 
     <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="30dp"
-    android:id="@+id/layout_second_set"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/rest1"
-    android:orientation="horizontal"
-    android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:id="@+id/layout_second_set"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rest1"
+        android:orientation="horizontal"
+        android:background="#fff"
 
-    android:weightSum="3"
-    >
+        android:weightSum="3"
+        >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SET"
-        android:textColor="#000"
-        android:textStyle="bold"
-        android:layout_marginLeft="20dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:textAlignment="center"
-        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SET"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="REPS"
-        android:textColor="#000"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:textAlignment="center"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DONE"
-        android:textColor="#000"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:textAlignment="center"
-        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="REPS"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DONE"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            />
 
-</LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -252,6 +264,7 @@
             />
 
         <TextView
+            android:id="@+id/t2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="10"
@@ -267,6 +280,7 @@
             android:layout_weight="1"
             android:layout_gravity="center">
             <CheckBox
+                android:visibility="invisible"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center_horizontal"
@@ -361,6 +375,7 @@
             />
 
         <TextView
+            android:id="@+id/t3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="10"
@@ -376,6 +391,7 @@
             android:layout_weight="1"
             android:layout_gravity="center">
             <CheckBox
+                android:visibility="invisible"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center_horizontal"
@@ -386,8 +402,51 @@
         </RelativeLayout>
 
     </LinearLayout>
-    
-    
+
+    <Button
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_below_third_set"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="@drawable/btn_shape"
+        android:text="Start"
+        android:id="@+id/video_button_start"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        />
+    <Button
+        android:visibility="invisible"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_below_third_set"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="@drawable/btn_shape"
+        android:text="continue"
+        android:id="@+id/video_button_continue"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        />
+    <Button
+        android:visibility="invisible"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_below_third_set"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="@drawable/btn_shape"
+        android:text="reload"
+        android:id="@+id/video_button_reload"
+        android:layout_gravity="left"
+        android:layout_margin="10dp"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -396,43 +455,45 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_below_third_set"
         app:layout_constraintBottom_toBottomOf="parent"
-
         >
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:layout_margin="20dp"
-
             >
-        <Button
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/video_button_back"
-            android:id="@+id/video_button_back"
-            android:layout_margin="10dp"
-            />
-        <Button
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:background="@drawable/btn_shape"
-            android:text="COMPLETE"
-            android:id="@+id/video_button_complete"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            />
-        <Button
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/video_button_pause"
-            android:id="@+id/video_button_pause"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            />
+
+            <Button
+                android:visibility="invisible"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/video_button_back"
+                android:id="@+id/video_button_back"
+                android:layout_margin="10dp"
+                />
+            <Button
+                android:visibility="invisible"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:background="@drawable/btn_shape"
+                android:text="Complete"
+                android:id="@+id/video_button_complete"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                />
+
+            <Button
+                android:visibility="invisible"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/video_button_pause"
+                android:id="@+id/video_button_pause"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                />
         </LinearLayout>
-
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

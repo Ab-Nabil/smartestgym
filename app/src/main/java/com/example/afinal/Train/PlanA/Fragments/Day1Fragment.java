@@ -30,11 +30,10 @@ public class Day1Fragment extends Fragment{
     ArrayList<TrainModel> trainModels;
     RecyclerView recyclerView;
     TrainAdapter trainAdapter;
+
     public Day1Fragment() {
         // Required empty public constructor
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -55,10 +54,8 @@ public class Day1Fragment extends Fragment{
                 startActivity(i);
             }
         });
-
         return view;
     }
-
     private void intitView() {
 
         recyclerView = view.findViewById(R.id.day1_RV);
