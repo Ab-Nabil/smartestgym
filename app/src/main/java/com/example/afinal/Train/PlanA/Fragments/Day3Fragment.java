@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.afinal.Profiles.ProgressMenuActivity;
 import com.example.afinal.Train.PlanA.Fragments.OnTrClick;
 import com.example.afinal.Train.PlanA.TrainAdapter;
 import com.example.afinal.Train.PlanA.TrainModel;
@@ -28,6 +31,8 @@ public class Day3Fragment extends Fragment{
     RecyclerView recyclerView;
     TrainAdapter trainAdapter;
     ArrayList<TrainModel> trainModels;
+    Button btnComplete;
+
     public Day3Fragment() {
         // Required empty public constructor
     }
@@ -40,6 +45,15 @@ public class Day3Fragment extends Fragment{
         view = inflater.inflate(R.layout.fragment_day3, container, false);
 
         intitView();
+        btnComplete = view.findViewById(R.id.btn_start_day3);
+        btnComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getActivity(), ProgressMenuActivity.class);
+                startActivity(intent);
+                Toast.makeText(getActivity(), "Good job Day Three is done, Check out your progress", Toast.LENGTH_LONG).show();
+            }
+        });
         trainAdapter.setOnItemClickListener(new TrainAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int posistion) {
@@ -49,6 +63,8 @@ public class Day3Fragment extends Fragment{
                 i.putExtra("name", list1Text);
                 i.putExtra("tool",list2Text);
                 i.putExtra("position",posistion);
+                i.putExtra("day","3");
+
                 startActivity(i);
             }
         });
@@ -58,37 +74,38 @@ public class Day3Fragment extends Fragment{
     private void intitView() {
 
         recyclerView = view.findViewById(R.id.day3_RV);
-        ArrayList<TrainModel> trainModels = new ArrayList<>();
-        TrainModel trainModel0 = new TrainModel("Dumbbell Shoulder Press\n" ,
+        trainModels  = new ArrayList<>();
+
+        TrainModel trainModel0 = new TrainModel("Dumbbell Shoulder Press" ,
                 "tool : dumbbell | sets : 4 | reps: 10", R.drawable.day3_0);
         trainModels.add(trainModel0);
-        TrainModel trainModel = new TrainModel("Barbell Front Raise\n" ,
+        TrainModel trainModel = new TrainModel("Barbell Front Raise" ,
                 "tool : Dumbbell | sets : 4 | reps: 10", R.drawable.day3_1);
         trainModels.add(trainModel);
-        TrainModel trainModel2 = new TrainModel("seated dumbbell lateral raise\n" ,
+        TrainModel trainModel2 = new TrainModel("seated dumbbell lateral raise" ,
                 "tool : Dumbbell | sets : 4 | reps: 10", R.drawable.day3_2);
         trainModels.add(trainModel2);
-        TrainModel trainModel3 = new TrainModel("Seated Arnold Press\n" ,
+        TrainModel trainModel3 = new TrainModel("Seated Arnold Press" ,
                 "tool : Dumbbell | sets : 4 | reps: 10", R.drawable.day3_3);
         trainModels.add(trainModel3);
 
-        TrainModel trainModel4 = new TrainModel("standing cable rope face pull\n" ,
+        TrainModel trainModel4 = new TrainModel("standing cable rope face pull" ,
                 "tool : Cable | sets : 4 | reps: 10", R.drawable.day3_4);
         trainModels.add(trainModel4);
 
-        TrainModel trainModel5 = new TrainModel("rear delt machine flyes\n" ,
+        TrainModel trainModel5 = new TrainModel("rear delt machine flyes" ,
                 "tool : Machine | sets : 4 | reps: 10", R.drawable.day3_5);
         trainModels.add(trainModel5);
 
-        TrainModel trainModel6 = new TrainModel("Barbell Shrug\n" ,
+        TrainModel trainModel6 = new TrainModel("Barbell Shrug" ,
                 "tool : Barbell | sets : 4 | reps: 10", R.drawable.day3_6);
         trainModels.add(trainModel6);
 
-        TrainModel trainModel7 = new TrainModel("Toe Touches\n" ,
+        TrainModel trainModel7 = new TrainModel("Toe Touches" ,
                 "tool : Machine | sets : 4 | reps: 10", R.drawable.day3_7);
         trainModels.add(trainModel7);
 
-        TrainModel trainModel8 = new TrainModel("Heel Touches\n" ,
+        TrainModel trainModel8 = new TrainModel("Heel Touches" ,
                 "tool : Machine | sets : 4 | reps: 10", R.drawable.day3_8);
         trainModels.add(trainModel8);
 

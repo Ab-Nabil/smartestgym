@@ -74,6 +74,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.TrainViewHol
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
                             listener.onItemClick(position);
+                            mImage.setImageResource(R.drawable.check_done);
                         }
                     }
                 }

@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.R;
+import com.example.afinal.Train.Inter_ContainerActivity;
 import com.example.afinal.Train.IntermediateActivity;
 import com.example.afinal.Train.PlanA.PlanAHomeActivity;
 import com.example.afinal.WelcomeActivity;
@@ -53,7 +54,7 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
     boolean navi_open = false;
     double BMR;
     double TDEE;
-
+    double IBW;
     FirebaseUser user;
     String userID;
     FirebaseAuth fAuth;
@@ -98,16 +99,16 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
                 Men: IBW [kg] = (height[cm] - 100) - ((height[cm] - 100) × 10%)
                 */
                 if (g.startsWith("m")) {
-                    double IBW = (h - 100) - ((h - 100) * 10 / 100);
+                     IBW = (h - 100) - ((h - 100) * 10 / 100);
                     //Math.ceil(IBW);
                     mGoalWeight.setText(""+(int)(IBW));
 
                     BMR = 66 + (13.75 * w) + (5 * h) - (6.76 * a);
                 } else if (g.startsWith("f")){
-                    double IBW = ((int)h - 100) - ((h - 100) * 15 / 100);
+                     IBW = ((int)h - 100) - ((h - 100) * 15 / 100);
                     mGoalWeight.setText(""+(int)(IBW));
 
-                    BMR = 655.1 + (9.56 * w) + (1.85 * h) - (4.68 * a);
+                    BMR = 65.1 + (9.56 * w) + (1.85 * h) - (4.68 * a);
                 }
 
                 if(al==1)
@@ -121,16 +122,15 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
 
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 DocumentReference Ref = db.collection("users").document(userID);
-                Ref.update("TDEE",TDEE);
+                Ref.update("TDEE",String.valueOf(TDEE));
                 DecimalFormat df = new DecimalFormat("#.#");
                 energyvalue.setText(String.valueOf(df.format(TDEE)));
-
+                changeweightvalue.setText(String.valueOf(IBW-w));
                 menuusernamev.setText(documentSnapshot.getString("username"));
                 usernamev.setText(documentSnapshot.getString("username"));
             }
         });
         //ahmed
-
 
         changeweightvalue=findViewById(R.id.changeweightvalue);
         energyvalue=findViewById(R.id.energyvalue);
@@ -242,7 +242,8 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
                 break;
             }
             case R.id.homeworkout:{
-                Intent intent=new Intent(MainProfileActivity.this,HomeWorkoutActivity.class);
+                Intent intent=new Intent(MainProfileActivity.this, Inter_ContainerActivity.class);
+                intent.putExtra("pageNum",9);
                 startActivity(intent);
                 break;
             }
@@ -428,6 +429,8 @@ public class MainProfileActivity extends AppCompatActivity implements View.OnCli
 
     public void openMealMenu(View view) {
         Intent intent=new Intent(MainProfileActivity.this,MealMenuActivity.class);
+        intent.putExtra("tdee",TDEE);
+        intent.putExtra("username",usernamev.getText().toString());
         startActivity(intent);
     }
 

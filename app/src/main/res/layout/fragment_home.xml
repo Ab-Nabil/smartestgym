@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Train.HomeFragment">
+    tools:context=".Train.home.plan_a.HomeFragment">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,6 +29,5 @@
                 android:layout_below="@id/home_RV"/>
         </RelativeLayout>
     </ScrollView>
-
 
 </RelativeLayout>

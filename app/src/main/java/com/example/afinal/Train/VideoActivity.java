@@ -18,7 +18,8 @@ import android.content.Intent;
     import android.widget.VideoView;
 
     import com.example.afinal.Profiles.MainProfileActivity;
-    import com.example.afinal.Train.PlanA.Fragments.OnTrClick;
+import com.example.afinal.Profiles.ProgressMenuActivity;
+import com.example.afinal.Train.PlanA.Fragments.OnTrClick;
     import com.example.afinal.Train.PlanA.TrainAdapter;
     import com.example.afinal.Train.PlanA.TrainModel;
     import com.example.afinal.R;
@@ -46,8 +47,8 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
     StorageReference storageReference;
     DocumentReference documentReference;
     String weightv;
-    float w;
-
+    float w,exeresult;
+    String exercalories1,exercalories,exercalories2,exercalories3;
     private Chronometer chronometer;
     Button start,back,complete,pause,continu,reload;
     private long pauseoffset;
@@ -58,7 +59,7 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
     ImageView backarrow;
     TextView f_tv,s_tv;
     VideoView mVideoView;
-    String videoName,result,videoPath;
+    String videoName,result,videoPath,mDay;
     ArrayList<TrainModel> trainModels;
     TrainAdapter trainAdapter;
     int position;
@@ -70,8 +71,9 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
         final DecimalFormat df = new DecimalFormat("#.#");
-
+        mDay = "";
         Intent i = getIntent();
+        mDay = i.getStringExtra("day");
         result = i.getStringExtra("name");
         String tool = i.getStringExtra("tool");
         position = i.getIntExtra("position",0);
@@ -85,6 +87,11 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                 weightv=documentSnapshot.getString("weight");
                 w = Float.parseFloat(weightv);
+                exercalories = documentSnapshot.getString("exercalories");
+                exercalories1 = documentSnapshot.getString("exercalories1");
+                exercalories2 = documentSnapshot.getString("exercalories2");
+                exercalories3 = documentSnapshot.getString("exercalories3");
+
             }
         });
 
@@ -245,17 +252,84 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
                 pauseoffset = SystemClock.elapsedRealtime() - chronometer.getBase();
                 reload.setVisibility(View.VISIBLE);
                 continu.setVisibility(View.INVISIBLE);
+                if (mDay.startsWith("1")) {
+                    if (result.equals("Incline Barbell Bench Press")) {
+                        exercalories = "0";
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        DocumentReference Ref = db.collection("users").document(userID);
+                        Ref.update("exercalories", exercalories);
+                        Toast.makeText(VideoActivity.this, mDay, Toast.LENGTH_LONG).show();
+                    }
+                    float total = (float) (SystemClock.elapsedRealtime() - chronometer.getBase()) / 60000;
+                    float metValue = (float) 5.0;
+                    final float caloresult = (float) ((total) * w * 3.5 * metValue) / 200;
+                    Toast.makeText(VideoActivity.this, df.format(caloresult) + " calories Burned", Toast.LENGTH_SHORT).show();
+                    float finalCalo = Float.parseFloat(exercalories) + caloresult;
+                    //add cal to firestore
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    DocumentReference Ref = db.collection("users").document(userID);
+                    Ref.update("exercalories", String.valueOf(finalCalo));
+                }
+                else if (mDay.startsWith("2")){
+                    if (result.equals("Wide-grip Lat Pulldown")) {
+                        exercalories1 = "0";
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        DocumentReference Ref = db.collection("users").document(userID);
+                        Ref.update("exercalories1", exercalories1);
+                    }
+                    float total = (float) (SystemClock.elapsedRealtime() - chronometer.getBase()) / 60000;
+                    float metValue = (float) 5.0;
+                    final float caloresult = (float) ((total) * w * 3.5 * metValue) / 200;
+                    Toast.makeText(VideoActivity.this, df.format(caloresult) + " calories Burned", Toast.LENGTH_SHORT).show();
+                    float finalCalo = Float.parseFloat(exercalories1) + caloresult;
+                    //add cal to firestore
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    DocumentReference Ref = db.collection("users").document(userID);
+                    Ref.update("exercalories1", String.valueOf(finalCalo));
+                }
+                else if (mDay.startsWith("3")){
+                    if (result.equals("Dumbbell Shoulder Press")) {
+                        exercalories2 = "0";
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        DocumentReference Ref = db.collection("users").document(userID);
+                        Ref.update("exercalories2", exercalories2);
+                    }
+                    float total = (float) (SystemClock.elapsedRealtime() - chronometer.getBase()) / 60000;
+                    float metValue = (float) 5.0;
+                    final float caloresult = (float) ((total) * w * 3.5 * metValue) / 200;
+                    Toast.makeText(VideoActivity.this, df.format(caloresult) + " calories Burned", Toast.LENGTH_SHORT).show();
+                    float finalCalo = Float.parseFloat(exercalories2) + caloresult;
+                    //add cal to firestore
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    DocumentReference Ref = db.collection("users").document(userID);
+                    Ref.update("exercalories2", String.valueOf(finalCalo));
+                }
+                else if (mDay.startsWith("4")){
+                    if (result.equals("Barbell Back Squat")) {
+                        exercalories3 = "0";
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        DocumentReference Ref = db.collection("users").document(userID);
+                        Ref.update("exercalories3", exercalories3);
+                    }
+                    float total = (float) (SystemClock.elapsedRealtime() - chronometer.getBase()) / 60000;
+                    float metValue = (float) 5.0;
+                    final float caloresult = (float) ((total) * w * 3.5 * metValue) / 200;
+                    Toast.makeText(VideoActivity.this, df.format(caloresult) + " calories Burned", Toast.LENGTH_SHORT).show();
+                    float finalCalo = Float.parseFloat(exercalories3) + caloresult;
+                    //add cal to firestore
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    DocumentReference Ref = db.collection("users").document(userID);
+                    Ref.update("exercalories3", String.valueOf(finalCalo));
+                }
+                else if (mDay.startsWith("h")){
 
-                float total = (float) (SystemClock.elapsedRealtime() - chronometer.getBase()) / 60000;
-                float metValue = (float) 5.0;
-                final float caloresult = (float) ((total) * w * 3.5 * metValue) / 200;
-                Toast.makeText(VideoActivity.this, df.format(caloresult) + " calories Burned", Toast.LENGTH_SHORT).show();
+                    float total = (float) (SystemClock.elapsedRealtime() - chronometer.getBase()) / 60000;
+                    float metValue = (float) 5.0;
+                    final float caloresult = (float) ((total) * w * 3.5 * metValue) / 200;
+                    Toast.makeText(VideoActivity.this, df.format(caloresult) + " calories Burned", Toast.LENGTH_SHORT).show();
+                    //add cal to firestore
 
-                //add cal to firestore
-                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                DocumentReference Ref = db.collection("users").document(userID);
-                    Ref.update("exercalories",caloresult);
-
+                }
                 backarrow.setVisibility(View.VISIBLE);
                 back.setVisibility(View.VISIBLE);
                 complete.setVisibility(View.INVISIBLE);
@@ -342,6 +416,54 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
                     videoPath = "android.resource://" + getPackageName() +"/" + R.raw.day2tr8;
                     videoPath();
                     break;
+
+                    //home
+                case "Jumping Rope":
+                    videoPath = "android.resource://" + getPackageName() +"/" + R.raw.hometr1;
+                    videoPath();
+                    break;
+                case "Mountain Climbers":
+                    videoPath = "android.resource://" + getPackageName() +"/" + R.raw.hometr2;
+                    videoPath();
+                    break;
+
+                    //day3
+                case "Dumbbell Shoulder Press":
+                    videoPath = "android.resource://" + getPackageName() +"/" + R.raw.day3tr1;
+                    videoPath();
+                    break;
+                case "Barbell Front Raise":
+                    videoPath = "android.resource://" + getPackageName() +"/" + R.raw.day3tr2;
+                    videoPath();
+                    break;
+                case "seated dumbbell lateral raise":
+                    videoPath = "android.resource://" + getPackageName() +"/" + R.raw.day3tr3;
+                    videoPath();
+                    break;
+                case "Seated Arnold Press":
+                    videoPath = "android.resource://" + getPackageName() +"/" + R.raw.day3tr4;
+                    videoPath();
+                    break;
+
+                    //day4
+                case "Barbell Back Squat":
+                    videoPath = "android.resource://" + getPackageName() +"/" + R.raw.day4tr1;
+                    videoPath();
+                    break;
+                case "Hack Squats (Shoulder Width)":
+                    videoPath = "android.resource://" + getPackageName() +"/" + R.raw.day4tr2;
+                    videoPath();
+                    break;
+                case "Smith machine lunges":
+                    videoPath = "android.resource://" + getPackageName() +"/" + R.raw.day4tr3;
+                    videoPath();
+                    break;
+                case "Seated Leg Curl":
+                    videoPath = "android.resource://" + getPackageName() +"/" + R.raw.day4tr4;
+                    videoPath();
+                    break;
+
+
             }
         }
 
@@ -388,7 +510,11 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
             switch (v.getId()){
 
                 case R.id.video_button_back: {
-                    onBackPressed();
+//                    if (result == "Russian Twists"){
+//
+//                    }
+                        onBackPressed();
+
                 }
 
                 case R.id.video_back_arrow:

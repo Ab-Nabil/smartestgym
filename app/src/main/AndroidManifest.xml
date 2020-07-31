@@ -25,7 +25,6 @@
         <activity android:name=".Profiles.SettingMenuActivity" />
         <activity android:name=".Profiles.ProfileMenuActivity" />
         <activity android:name=".Profiles.MealMenuActivity" />
-        <activity android:name=".Profiles.HomeWorkoutActivity" />
         <activity android:name=".Profiles.gymWorkoutActivity" />
         <activity android:name=".Train.PlanA.PlanAHomeActivity" />
         <activity android:name=".Train.PlanB.PlanBHomeActivity" />

@@ -12,6 +12,7 @@ import com.example.afinal.Train.PlanA.Fragments.Day1Fragment;
 import com.example.afinal.Train.PlanA.Fragments.Day2Fragment;
 import com.example.afinal.Train.PlanA.Fragments.Day3Fragment;
 import com.example.afinal.Train.PlanA.Fragments.Day4Fragment;
+import com.example.afinal.Train.home.plan_a.HomeFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
@@ -24,8 +25,8 @@ import androidx.fragment.app.FragmentManager;
 public class Inter_ContainerActivity extends AppCompatActivity implements View.OnClickListener {
     Button btnn;
     int pageNum;
-    TextView mplan_tv;
-    ImageView image_container;
+    TextView mplan_tv,inter_tv_container;
+    ImageView image_container,backArrow;
     StorageReference storageReference;
     FirebaseAuth fAuth;
     @Override
@@ -36,6 +37,8 @@ public class Inter_ContainerActivity extends AppCompatActivity implements View.O
         image_container = findViewById(R.id.profile_pic_intermediate_container);
         storageReference = FirebaseStorage.getInstance().getReference();
         fAuth = FirebaseAuth.getInstance();
+        backArrow = findViewById(R.id.inter_back_arrow);
+        inter_tv_container = findViewById(R.id.inter_tv_container);
         StorageReference profileRef = storageReference.child("users/"+fAuth.getCurrentUser().getUid()+"/profile.jpg");
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -65,12 +68,20 @@ public class Inter_ContainerActivity extends AppCompatActivity implements View.O
             fragmentManager4.beginTransaction().replace(R.id.page_container_Empty,new Day4Fragment()).commit();
             mplan_tv.setText("Day 4 - Legs");
         }
+        else if(pageNum == 9){
+            FragmentManager fragmentManager4 = getSupportFragmentManager();
+            fragmentManager4.beginTransaction().replace(R.id.page_container_Empty,new HomeFragment()).commit();
+            mplan_tv.setText("Home");
+            inter_tv_container.setText("Home Workout");
+        }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-
+            case R.id.inter_back_arrow:
+                onBackPressed();
+                break;
         }
     }
 }

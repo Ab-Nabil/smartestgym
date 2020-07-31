@@ -37,6 +37,10 @@ public class CreateActiveLevelActivity extends AppCompatActivity implements View
     String userID;
 
     String gender,weight,height,age,fit,active,username;
+    String exercalories = "0";
+    String exercalories1 ="0";
+    String exercalories2 ="0";
+    String exercalories3 ="0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +83,10 @@ public class CreateActiveLevelActivity extends AppCompatActivity implements View
         user.put("height",height);
         user.put("age",age);
         user.put("fit",fit);
-
+        user.put("exercalories",exercalories);
+        user.put("exercalories1",exercalories1);
+        user.put("exercalories2",exercalories2);
+        user.put("exercalories3",exercalories3);
 
     }
 

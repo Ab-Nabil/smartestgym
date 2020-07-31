@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.afinal.Profiles.ProgressMenuActivity;
 import com.example.afinal.Train.PlanA.Fragments.OnTrClick;
 import com.example.afinal.Train.PlanA.TrainAdapter;
 import com.example.afinal.Train.PlanA.TrainModel;
@@ -30,6 +32,7 @@ public class Day1Fragment extends Fragment{
     ArrayList<TrainModel> trainModels;
     RecyclerView recyclerView;
     TrainAdapter trainAdapter;
+    Button btnComplete;
 
     public Day1Fragment() {
         // Required empty public constructor
@@ -41,7 +44,15 @@ public class Day1Fragment extends Fragment{
         view = inflater.inflate(R.layout.fragment_day1, container, false);
 
         intitView();
-
+        btnComplete = view.findViewById(R.id.btn_start_day1);
+        btnComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getActivity(), ProgressMenuActivity.class);
+                startActivity(intent);
+                Toast.makeText(getActivity(), "Good job Day one is done, Check out your progress", Toast.LENGTH_LONG).show();
+            }
+        });
         trainAdapter.setOnItemClickListener(new TrainAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int posistion) {
@@ -51,6 +62,7 @@ public class Day1Fragment extends Fragment{
                 i.putExtra("name", list1Text);
                 i.putExtra("tool",list2Text);
                 i.putExtra("position",posistion);
+                i.putExtra("day","1");
                 startActivity(i);
             }
         });

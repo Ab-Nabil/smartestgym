@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.afinal.Profiles.ProgressMenuActivity;
 import com.example.afinal.Train.PlanA.Fragments.OnTrClick;
 import com.example.afinal.Train.PlanA.TrainAdapter;
 import com.example.afinal.Train.PlanA.TrainModel;
@@ -28,6 +32,7 @@ public class Day2Fragment extends Fragment {
     RecyclerView recyclerView;
     TrainAdapter trainAdapter;
     ArrayList<TrainModel> trainModels;
+    Button btnComplete;
     public Day2Fragment() {
         // Required empty public constructor
     }
@@ -40,7 +45,15 @@ public class Day2Fragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_day2, container, false);
 
         intitView();
-
+        btnComplete = view.findViewById(R.id.btn_start_day2);
+        btnComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getActivity(), ProgressMenuActivity.class);
+                startActivity(intent);
+                Toast.makeText(getActivity(), "Good job Day Two is done, Check out your progress", Toast.LENGTH_LONG).show();
+            }
+        });
         trainAdapter.setOnItemClickListener(new TrainAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int posistion) {
@@ -50,6 +63,7 @@ public class Day2Fragment extends Fragment {
                 i.putExtra("name", list1Text);
                 i.putExtra("tool",list2Text);
                 i.putExtra("position",posistion);
+                i.putExtra("day","2");
                 startActivity(i);
             }
         });
@@ -60,7 +74,8 @@ public class Day2Fragment extends Fragment {
     private void intitView() {
 
         recyclerView = view.findViewById(R.id.day2_RV);
-        ArrayList<TrainModel> trainModels = new ArrayList<>();
+        trainModels  = new ArrayList<>();
+
 
         TrainModel trainModel0 = new TrainModel("Wide-grip Lat Pulldown",
                 "tool : Machine | sets : 4 | reps: 10", R.drawable.day2_0);

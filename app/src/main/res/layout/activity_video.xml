@@ -52,10 +52,9 @@
         android:layout_margin="13dp"
         >
         <VideoView
-            android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_width="wrap_content"
+            android:layout_height="180dp"
             android:id="@+id/video_view"
-
             />
     </FrameLayout>
     <TextView

@@ -90,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void registerUser(){
-        usernamevalue = mUserName.getText().toString();
+        usernamevalue = mUserName.getText().toString().trim();
         String emailvalue = mEmail.getText().toString();
          passwordvalue = mPassword.getText().toString();
          confirmpasswordvalue = mConfPassword.getText().toString();

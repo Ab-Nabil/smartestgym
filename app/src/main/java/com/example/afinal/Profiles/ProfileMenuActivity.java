@@ -26,7 +26,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
+
 public class ProfileMenuActivity extends AppCompatActivity {
+    float TDEE;
+    TextView energy;
+
     ImageView profilebackrow,profileimg;
     TextView agetv,weighttv,heighttv,emailtv,usernamev,goalweighttv;
     LinearLayout logout,changepass;
@@ -45,6 +50,9 @@ public class ProfileMenuActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
         userID = fAuth.getCurrentUser().getUid();
+
+
+
 
         agetv = findViewById(R.id.agevalue);
         emailtv = findViewById(R.id.EmailProfile);
@@ -93,6 +101,11 @@ public class ProfileMenuActivity extends AppCompatActivity {
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                TDEE = Float.parseFloat(documentSnapshot.getString("TDEE"));
+                DecimalFormat df = new DecimalFormat("#.#");
+                energy=findViewById(R.id.energyprofilevalue);
+                energy.setText(df.format(TDEE));
+
                 agetv.setText(documentSnapshot.getString("age")+" Years");
                 heighttv.setText(documentSnapshot.getString("height")+" CM");
                 weighttv.setText(documentSnapshot.getString("weight")+" KG");
